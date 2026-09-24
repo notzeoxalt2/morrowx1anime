@@ -1,7 +1,27 @@
 {
   "name": "AnimeByMorrow",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "scrapers": [
+    {
+      "id": "movix",
+      "name": "Movix",
+      "description": "Verified HLS streams with quality labels",
+      "version": "1.0.0",
+      "author": "Morrow",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/movix.js",
+      "enabled": true,
+      "formats": [
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en",
+        "fr"
+      ]
+    },
     {
       "id": "animesalt",
       "name": "AnimeSalt",

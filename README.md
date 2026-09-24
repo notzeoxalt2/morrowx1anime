@@ -7,6 +7,8 @@ Nuvio now shows each supplied domain as its own provider entry. Each provider
 uses the same resilient multi-server implementation, so enabling one site does
 not require enabling the others.
 
+Movix is also included as a verified HLS fallback for movie, TV, and anime TMDB IDs.
+
 ## Included Sites
 
 - AnimeSalt: https://animesalt.cx/
@@ -46,3 +48,5 @@ records the live homepage checks made while this package was built.
 
 In Nuvio, open **Settings -> Local Scrapers** and add the raw URL of this package's
 `manifest.json` after hosting the folder on a static file host.
+
+GitHub raw manifest: https://raw.githubusercontent.com/notzeoxalt2/morrowx1anime/main/manifest.json
