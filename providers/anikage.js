@@ -71,10 +71,10 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     const serversJson = await serversRes.json();
     const serverList = serversJson.servers || [];
 
-    // Select top reliable servers to prevent 429 rate limiting
-    const preferredServers = ['megg', 'koto', 'kiwi', 'wave'];
+    // Prioritize top working direct servers: koto, megg, kiwi
+    const preferredServers = ['koto', 'megg', 'kiwi'];
     const chosenServers = preferredServers.filter(s => serverList.some(item => item.id === s));
-    const targetServerIds = chosenServers.length ? chosenServers : serverList.slice(0, 4).map(item => item.id);
+    const targetServerIds = chosenServers.length ? chosenServers : serverList.slice(0, 3).map(item => item.id);
     const fetchTasks = [];
 
     for (const s of targetServerIds) {
@@ -94,9 +94,8 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
             if (!srcRes.ok) return [];
             const srcJson = await srcRes.json();
             const sources = srcJson.sources || [];
-            const embeds = srcJson.embeds || [];
             const subtitles = (srcJson.subtitles || []).map(sub => ({
-              url: sub.file ? `https://og.bakayaro.live/m3u8/${sub.file}` : sub.embedUrl,
+              url: sub.file ? `https://og.bakayaro.live/m3u8/${sub.file}` : null,
               language: sub.label || 'en',
               name: sub.label || 'English'
             })).filter(sub => sub.url);
@@ -109,7 +108,7 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
               if (!src.url) continue;
               const isM3u8 = src.isM3U8 !== false;
               const streamUrl = `https://og.bakayaro.live/${isM3u8 ? 'm3u8' : 'stream'}/${src.url}`;
-              const quality = src.quality || src.label || '1080p';
+              const quality = '1080p';
               const typeTag = isDub ? '[DUB]' : '[SUB]';
               const langDisplay = isDub ? '🗣️ English Dub' : '🇯🇵 Japanese Sub';
 
@@ -120,28 +119,6 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
                 quality: quality,
                 language: isDub ? 'en' : 'ja',
                 type: isM3u8 ? 'hls' : 'mp4',
-                provider: 'Anikage',
-                headers: {
-                  'Referer': 'https://anikage.cc/',
-                  'Origin': 'https://anikage.cc',
-                  'User-Agent': USER_AGENT
-                },
-                subtitles: subtitles
-              });
-            }
-
-            for (const emb of embeds) {
-              if (!emb.url) continue;
-              const embServer = emb.server || 'Embed';
-              const typeTag = isDub ? '[DUB]' : '[SUB]';
-              const langDisplay = isDub ? '🗣️ English Dub' : '🇯🇵 Japanese Sub';
-              results.push({
-                name: `Server ${serverNameFormatted} (${embServer}) ${typeTag}`,
-                title: `Anikage • Server ${serverNameFormatted} ${embServer} ${typeTag} | ${langDisplay}`,
-                url: emb.url,
-                quality: '1080p',
-                language: isDub ? 'en' : 'ja',
-                type: 'embed',
                 provider: 'Anikage',
                 headers: {
                   'Referer': 'https://anikage.cc/',
