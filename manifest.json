@@ -1,351 +1,294 @@
 {
-  "name": "Morrow Anime Providers 1",
-  "version": "1.2.0",
-  "description": "Verified standalone working providers for Morrow Anime Providers 1",
+  "name": "Morrow Anime 1",
+  "version": "1.3.0",
+  "description": "Verified standalone working anime providers for Morrow Anime 1",
   "scrapers": [
     {
       "id": "hianime",
       "name": "HiAnime",
       "description": "HiAnime standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/hianime.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/hianime.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "animepahe",
       "name": "AnimePahe",
       "description": "AnimePahe standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/animepahe.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/animepahe.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "animesalt",
       "name": "AnimeSalt",
       "description": "AnimeSalt standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/animesalt.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/animesalt.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "anidb",
       "name": "AniDB",
       "description": "AniDB standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/anidb.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/anidb.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "anikage",
       "name": "Anikage",
       "description": "Anikage standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/anikage.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/anikage.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "anikototv",
       "name": "AniKotoTV",
       "description": "AniKotoTV standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/anikototv.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/anikototv.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "aniwaves",
       "name": "Aniwaves",
       "description": "Aniwaves standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/aniwaves.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/aniwaves.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "anitaku",
       "name": "Anitaku",
       "description": "Anitaku standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/anitaku.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/anitaku.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "miruro",
       "name": "Miruro",
       "description": "Miruro standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/miruro.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/miruro.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "reanime",
       "name": "ReAnime",
       "description": "ReAnime standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/reanime.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/reanime.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "animeheaven",
       "name": "AnimeHeaven",
       "description": "AnimeHeaven standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/animeheaven.js",
+      "version": "1.3.0",
+      "author": "Morrow Team",
       "supportedTypes": [
-        "movie",
+        "anime",
         "tv",
-        "anime"
+        "movie"
       ],
+      "filename": "providers/animeheaven.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
+        "hi"
       ]
     },
     {
       "id": "kurage",
       "name": "Kurage",
       "description": "Kurage standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
+      "version": "1.3.0",
+      "author": "Morrow Team",
+      "supportedTypes": [
+        "anime",
+        "tv",
+        "movie"
+      ],
       "filename": "providers/kurage.js",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
       "enabled": true,
       "hasSettings": false,
       "formats": [
-        "mp4",
-        "m3u8"
+        "m3u8",
+        "mp4"
       ],
       "contentLanguage": [
+        "ja",
         "en",
-        "ja"
-      ]
-    },
-    {
-      "id": "animezey",
-      "name": "AnimeZeY",
-      "description": "AnimeZeY standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/animezey.js",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
-      "enabled": true,
-      "hasSettings": false,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "contentLanguage": [
-        "en",
-        "ja"
-      ]
-    },
-    {
-      "id": "kickassanime",
-      "name": "KickassAnime",
-      "description": "KickassAnime standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/kickassanime.js",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
-      "enabled": true,
-      "hasSettings": false,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "contentLanguage": [
-        "en",
-        "ja"
-      ]
-    },
-    {
-      "id": "anime-sama",
-      "name": "Anime-Sama",
-      "description": "Anime-Sama standalone high-speed anime scraper",
-      "version": "1.2.0",
-      "author": "Morrow",
-      "filename": "providers/anime-sama.js",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
-      "enabled": true,
-      "hasSettings": false,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "contentLanguage": [
-        "en",
-        "ja"
+        "hi"
       ]
     }
   ]
