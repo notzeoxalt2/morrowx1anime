@@ -19,6 +19,31 @@ async function getTitleFromTmdb(tmdbId, mediaType) {
   }
 }
 
+function safeAtob(b64) {
+  if (typeof atob === 'function') {
+    try { return atob(b64); } catch (_) {}
+  }
+  try {
+    if (typeof Buffer !== 'undefined') {
+      return Buffer.from(b64, 'base64').toString('utf8');
+    }
+  } catch (_) {}
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+  let str = '';
+  let buffer = 0, bits = 0;
+  for (let i = 0; i < b64.length; i++) {
+    const val = chars.indexOf(b64.charAt(i));
+    if (val === -1) continue;
+    buffer = (buffer << 6) | (val & 0x3f);
+    bits += 6;
+    if (bits >= 8) {
+      bits -= 8;
+      str += String.fromCharCode((buffer >> bits) & 0xff);
+    }
+  }
+  return str;
+}
+
 async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
   try {
     const safeSeason = Number(season) > 0 ? Number(season) : 1;
@@ -87,8 +112,11 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     const plyrMatch = epHtml.match(/multi-lang-plyr\.php\?data=([^"'\s&]+)/);
     if (plyrMatch) {
       try {
-        const decoded = atob(plyrMatch[1]);
-        const items = JSON.parse(decoded);
+        const decoded = safeAtob(plyrMatch[1]);
+        const start = decoded.indexOf('[');
+        const end = decoded.lastIndexOf(']');
+        const jsonStr = (start !== -1 && end !== -1) ? decoded.slice(start, end + 1) : decoded;
+        const items = JSON.parse(jsonStr);
         for (const item of items) {
           const lang = item.language || 'English';
           const link = item.link;
@@ -101,11 +129,11 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
                            lang.toLowerCase() === 'tamil' ? 'ta' :
                            lang.toLowerCase() === 'telugu' ? 'te' : 'und';
           const tag = isDub ? `[${lang} Dub]` : `[${lang} Sub]`;
-          const langDisplay = isDub ? `ðŸ—£ï¸ ${lang} Dub` : `ðŸ‡¯ðŸ‡µ Japanese Sub`;
+          const langDisplay = isDub ? `🗣️ ${lang} Dub` : `🇯🇵 Japanese Sub`;
 
           streams.push({
-            name: `Multi-Lang ${tag}`,
-            title: `AnimeSalt â€¢ Multi-Lang Player ${tag} | ${langDisplay}`,
+            name: `AnimeSalt • Multi-Lang ${tag}`,
+            title: `AnimeSalt • Multi-Lang Player ${tag} | ${langDisplay}`,
             url: link,
             quality: '1080p',
             language: langCode,

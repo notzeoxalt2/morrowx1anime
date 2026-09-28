@@ -71,11 +71,13 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     const serversJson = await serversRes.json();
     const serverList = serversJson.servers || [];
 
-    // Prioritized servers available on Anikage
-    const priorityServerIds = ['koto', 'megg', 'kiwi', 'wave', 'suge', 'dib'];
+    // Select top reliable servers to prevent 429 rate limiting
+    const preferredServers = ['megg', 'koto', 'kiwi', 'wave'];
+    const chosenServers = preferredServers.filter(s => serverList.some(item => item.id === s));
+    const targetServerIds = chosenServers.length ? chosenServers : serverList.slice(0, 4).map(item => item.id);
     const fetchTasks = [];
 
-    for (const s of priorityServerIds) {
+    for (const s of targetServerIds) {
       const sInfo = serverList.find(item => item.id === s);
       const subTypes = sInfo?.subTypes || ['sub', 'dub'];
 
@@ -92,6 +94,7 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
             if (!srcRes.ok) return [];
             const srcJson = await srcRes.json();
             const sources = srcJson.sources || [];
+            const embeds = srcJson.embeds || [];
             const subtitles = (srcJson.subtitles || []).map(sub => ({
               url: sub.file ? `https://og.bakayaro.live/m3u8/${sub.file}` : sub.embedUrl,
               language: sub.label || 'en',
@@ -126,6 +129,29 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
                 subtitles: subtitles
               });
             }
+
+            for (const emb of embeds) {
+              if (!emb.url) continue;
+              const embServer = emb.server || 'Embed';
+              const typeTag = isDub ? '[DUB]' : '[SUB]';
+              const langDisplay = isDub ? '🗣️ English Dub' : '🇯🇵 Japanese Sub';
+              results.push({
+                name: `Server ${serverNameFormatted} (${embServer}) ${typeTag}`,
+                title: `Anikage • Server ${serverNameFormatted} ${embServer} ${typeTag} | ${langDisplay}`,
+                url: emb.url,
+                quality: '1080p',
+                language: isDub ? 'en' : 'ja',
+                type: 'embed',
+                provider: 'Anikage',
+                headers: {
+                  'Referer': 'https://anikage.cc/',
+                  'Origin': 'https://anikage.cc',
+                  'User-Agent': USER_AGENT
+                },
+                subtitles: subtitles
+              });
+            }
+
             return results;
           } catch (_) {
             return [];
