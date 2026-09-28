@@ -1,13 +1,13 @@
-{
+﻿{
   "name": "Morrow Anime 1",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Verified standalone working anime providers for Morrow Anime 1",
   "scrapers": [
     {
       "id": "hianime",
       "name": "HiAnime",
       "description": "HiAnime standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -31,7 +31,7 @@
       "id": "animepahe",
       "name": "AnimePahe",
       "description": "AnimePahe standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -55,7 +55,7 @@
       "id": "animesalt",
       "name": "AnimeSalt",
       "description": "AnimeSalt standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -79,7 +79,7 @@
       "id": "anidb",
       "name": "AniDB",
       "description": "AniDB standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -103,7 +103,7 @@
       "id": "anikage",
       "name": "Anikage",
       "description": "Anikage standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -127,7 +127,7 @@
       "id": "anikototv",
       "name": "AniKotoTV",
       "description": "AniKotoTV standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -151,7 +151,7 @@
       "id": "aniwaves",
       "name": "Aniwaves",
       "description": "Aniwaves standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -175,7 +175,7 @@
       "id": "anitaku",
       "name": "Anitaku",
       "description": "Anitaku standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -199,7 +199,7 @@
       "id": "miruro",
       "name": "Miruro",
       "description": "Miruro standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -223,7 +223,7 @@
       "id": "reanime",
       "name": "ReAnime",
       "description": "ReAnime standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -247,7 +247,7 @@
       "id": "animeheaven",
       "name": "AnimeHeaven",
       "description": "AnimeHeaven standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",
@@ -271,7 +271,7 @@
       "id": "kurage",
       "name": "Kurage",
       "description": "Kurage standalone high-speed anime scraper",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime",

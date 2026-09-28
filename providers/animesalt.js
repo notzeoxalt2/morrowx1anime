@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Morrow Standalone Anime Scraper: AnimeSalt
  * Source Site: https://animesalt.cx/
  * Real Multi-Language Player Integration (English Dub, Japanese Sub, Hindi, Tamil, Telugu)
@@ -101,15 +101,15 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
                            lang.toLowerCase() === 'tamil' ? 'ta' :
                            lang.toLowerCase() === 'telugu' ? 'te' : 'und';
           const tag = isDub ? `[${lang} Dub]` : `[${lang} Sub]`;
-          const langDisplay = isDub ? `🗣️ ${lang} Dub` : `🇯🇵 Japanese Sub`;
+          const langDisplay = isDub ? `ðŸ—£ï¸ ${lang} Dub` : `ðŸ‡¯ðŸ‡µ Japanese Sub`;
 
           streams.push({
             name: `Multi-Lang ${tag}`,
-            title: `AnimeSalt • Multi-Lang Player ${tag} | ${langDisplay}`,
+            title: `AnimeSalt â€¢ Multi-Lang Player ${tag} | ${langDisplay}`,
             url: link,
             quality: '1080p',
             language: langCode,
-            type: isDub ? 'dub' : 'sub',
+            type: 'hls',
             provider: 'AnimeSalt',
             headers: {
               'Referer': 'https://animesalt.cx/',
@@ -131,3 +131,4 @@ module.exports = {
   getStreams
 };
 globalThis.getStreams = getStreams;
+
