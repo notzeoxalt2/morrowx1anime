@@ -1,18 +1,16 @@
 {
   "name": "Morrow Anime 1",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Verified standalone working anime providers for Morrow Anime 1",
   "scrapers": [
     {
       "id": "hianime",
       "name": "HiAnime",
       "description": "HiAnime standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/hianime.js",
       "enabled": true,
@@ -31,12 +29,10 @@
       "id": "animepahe",
       "name": "AnimePahe",
       "description": "AnimePahe standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/animepahe.js",
       "enabled": true,
@@ -55,12 +51,10 @@
       "id": "animesalt",
       "name": "AnimeSalt",
       "description": "AnimeSalt standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/animesalt.js",
       "enabled": true,
@@ -79,12 +73,10 @@
       "id": "anidb",
       "name": "AniDB",
       "description": "AniDB standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/anidb.js",
       "enabled": true,
@@ -103,12 +95,10 @@
       "id": "anikage",
       "name": "Anikage",
       "description": "Anikage standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/anikage.js",
       "enabled": true,
@@ -127,12 +117,10 @@
       "id": "anikototv",
       "name": "AniKotoTV",
       "description": "AniKotoTV standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/anikototv.js",
       "enabled": true,
@@ -151,12 +139,10 @@
       "id": "aniwaves",
       "name": "Aniwaves",
       "description": "Aniwaves standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/aniwaves.js",
       "enabled": true,
@@ -175,12 +161,10 @@
       "id": "anitaku",
       "name": "Anitaku",
       "description": "Anitaku standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/anitaku.js",
       "enabled": true,
@@ -199,12 +183,10 @@
       "id": "miruro",
       "name": "Miruro",
       "description": "Miruro standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/miruro.js",
       "enabled": true,
@@ -223,12 +205,10 @@
       "id": "reanime",
       "name": "ReAnime",
       "description": "ReAnime standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/reanime.js",
       "enabled": true,
@@ -247,12 +227,10 @@
       "id": "animeheaven",
       "name": "AnimeHeaven",
       "description": "AnimeHeaven standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/animeheaven.js",
       "enabled": true,
@@ -271,12 +249,10 @@
       "id": "kurage",
       "name": "Kurage",
       "description": "Kurage standalone high-speed anime scraper",
-      "version": "1.6.2",
+      "version": "1.6.3",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime",
-        "tv",
-        "movie"
+        "anime"
       ],
       "filename": "providers/kurage.js",
       "enabled": true,
