@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Standalone Bundled Scraper: Anitaku
  * Source Site: https://anitaku.io/
  * API: anidap.lol / chad.anidap.lol

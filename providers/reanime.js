@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Standalone Bundled Scraper: ReAnime
  * Source Site: https://reanime.to/
  * API: anidap.lol / chad.anidap.lol

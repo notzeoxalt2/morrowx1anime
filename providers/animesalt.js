@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Morrow Standalone Anime Scraper: AnimeSalt
  * Source Site: https://animesalt.cx/
  * Real Multi-Language Player Integration (English Dub, Japanese Sub, Hindi, Tamil, Telugu)

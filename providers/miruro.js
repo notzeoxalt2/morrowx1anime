@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Standalone Bundled Scraper: Miruro
  * Source Site: https://www.miruro.to/
  * API: anidap.lol / chad.anidap.lol

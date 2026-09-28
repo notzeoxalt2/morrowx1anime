@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Standalone Bundled Scraper: Aniwaves
  * Source Site: https://aniwaves.ru/
  * API: anidap.lol / chad.anidap.lol

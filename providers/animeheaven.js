@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Standalone Bundled Scraper: AnimeHeaven
  * Source Site: https://animeheaven.me/
  * API: anidap.lol / chad.anidap.lol

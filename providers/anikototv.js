@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Standalone Bundled Scraper: AniKotoTV
  * Source Site: https://anikototv.to/
  * API: anidap.lol / chad.anidap.lol

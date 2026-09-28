@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Standalone Bundled Scraper: AniDB
  * Source Site: https://anidb.net/
  * API: anidap.lol / chad.anidap.lol

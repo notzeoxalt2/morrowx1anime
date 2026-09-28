@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Standalone Bundled Scraper: Kurage
  * Source Site: https://kurage.stream/
  * API: anidap.lol / chad.anidap.lol

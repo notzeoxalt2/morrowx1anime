@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Standalone Bundled Scraper: AnimePahe
  * Source Site: https://animepahe.pw/
  * API: anidap.lol / chad.anidap.lol
