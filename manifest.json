@@ -1,50 +1,49 @@
 {
-  "name": "Morrow Anime 1 - Core",
+  "name": "Morrow Anime Providers 1",
   "version": "1.2.0",
-  "description": "Verified standalone working providers for Morrow Anime 1 - Core",
+  "description": "Verified standalone working providers for Morrow Anime Providers 1",
   "scrapers": [
     {
       "id": "hianime",
       "name": "HiAnime",
-      "description": "HiAnime multi-server anime streaming with real-time mapping and subtitles",
-      "version": "1.0.0",
-      "author": "Nuvio Team",
+      "description": "HiAnime standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/hianime.js",
       "supportedTypes": [
         "movie",
         "tv",
         "anime"
       ],
-      "filename": "providers/hianime.js",
       "enabled": true,
-      "hasSettings": true,
+      "hasSettings": false,
       "formats": [
+        "mp4",
         "m3u8"
       ],
-      "logo": "https://i.postimg.cc/13SYJPTx/hianime.png",
       "contentLanguage": [
-        "ja",
-        "en"
+        "en",
+        "ja"
       ]
     },
     {
       "id": "animepahe",
       "name": "AnimePahe",
-      "description": "Watch anime online free in HD with fast streaming servers. Stream latest anime episodes and movies daily",
-      "version": "1.0.1",
-      "author": "Nuvio Team",
+      "description": "AnimePahe standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/animepahe.js",
       "supportedTypes": [
         "movie",
         "tv",
         "anime"
       ],
-      "filename": "providers/animepahe.js",
       "enabled": true,
-      "hasSettings": true,
+      "hasSettings": false,
       "formats": [
-        "m3u8",
-        "mp4"
+        "mp4",
+        "m3u8"
       ],
-      "logo": "https://i.postimg.cc/c4ZBGNNs/animepahe.png",
       "contentLanguage": [
         "en",
         "ja"
@@ -52,121 +51,22 @@
     },
     {
       "id": "animesalt",
-      "name": "🧂 AnimeSalt",
-      "description": "Watch Anime in – Hindi, Tamil & Telugu.",
-      "version": "1.0.0",
-      "author": "piratezoro9",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
+      "name": "AnimeSalt",
+      "description": "AnimeSalt standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
       "filename": "providers/animesalt.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "m3u8",
-        "mp4"
-      ],
-      "logo": "https://i.postimg.cc/1X24MYhg/animesalt.png",
-      "contentLanguage": [
-        "hi",
-        "en",
-        "ja"
-      ]
-    },
-    {
-      "id": "animekai",
-      "name": "AnimeKai",
-      "description": "AnimeKai TV episodes via AnimeKai servers",
-      "version": "1.0.0",
-      "author": "Nuvio Team",
       "supportedTypes": [
         "movie",
         "tv",
         "anime"
       ],
-      "filename": "providers/animekai.js",
       "enabled": true,
-      "hasSettings": true,
-      "limited": true,
+      "hasSettings": false,
       "formats": [
         "mp4",
         "m3u8"
       ],
-      "logo": "https://i.postimg.cc/MKJd7fy7/animekai.png",
-      "contentLanguage": [
-        "en"
-      ]
-    },
-    {
-      "id": "allanime",
-      "name": "AllAnime",
-      "description": "AllAnime - Anime and Manga content streaming",
-      "version": "1.0.0",
-      "author": "",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
-      "filename": "providers/allanime.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv",
-        "m3u8"
-      ],
-      "logo": "https://i.postimg.cc/DwpqLJWV/allanime.png",
-      "contentLanguage": [
-        "en",
-        "ja"
-      ]
-    },
-    {
-      "id": "allwish",
-      "name": "🌟 All-Wish",
-      "description": "All-Wish TV episodes via All-Wish servers",
-      "version": "1.0.1",
-      "author": "Kabir",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
-      "filename": "providers/allwish.js",
-      "enabled": true,
-      "hasSettings": true,
-      "limited": true,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "logo": "https://i.postimg.cc/WpFW45WQ/allwish.png",
-      "contentLanguage": [
-        "en",
-        "ja"
-      ]
-    },
-    {
-      "id": "anikototv",
-      "name": "AnikotoTV",
-      "description": "Anime provider for AnikotoTV.to via Mapper API + Native Extractor",
-      "version": "1.0.5",
-      "author": "piratezoro9",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
-      "filename": "providers/anikototv.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4"
-      ],
-      "logo": "https://i.postimg.cc/JhL3HBR4/anikototv.png",
       "contentLanguage": [
         "en",
         "ja"
@@ -175,122 +75,136 @@
     {
       "id": "anidb",
       "name": "AniDB",
-      "description": "Subbed and dubbed anime from AniDB.",
-      "version": "1.0.0",
-      "author": "Nuvio Team (ChillPill)",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
+      "description": "AniDB standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
       "filename": "providers/anidb.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "logo": "https://i.postimg.cc/rmMzZ45K/anidb.png",
-      "contentLanguage": [
-        "en",
-        "ja",
-        "ko"
-      ]
-    },
-    {
-      "id": "animetsu",
-      "name": "Animetsu",
-      "description": "Lightning fast sub & dub anime streams via Animetsu",
-      "version": "1.0.0",
-      "author": "piratezoro9",
       "supportedTypes": [
         "movie",
         "tv",
         "anime"
       ],
-      "filename": "providers/animetsu.js",
       "enabled": true,
-      "hasSettings": true,
+      "hasSettings": false,
       "formats": [
+        "mp4",
         "m3u8"
       ],
-      "logo": "https://i.postimg.cc/0Q3DvLx7/animetsu.png",
       "contentLanguage": [
         "en",
         "ja"
       ]
     },
     {
-      "id": "animeworld",
-      "name": "🗡️ AnimeWorld",
-      "description": "Watch AnimeWorld India",
-      "version": "1.0.0",
-      "author": "piratezoro9",
+      "id": "anikage",
+      "name": "Anikage",
+      "description": "Anikage standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/anikage.js",
       "supportedTypes": [
         "movie",
         "tv",
         "anime"
       ],
-      "filename": "providers/animeworld.js",
       "enabled": true,
-      "hasSettings": true,
+      "hasSettings": false,
       "formats": [
+        "mp4",
         "m3u8"
       ],
-      "logo": "https://i.postimg.cc/wxD6rVKX/animeworld.png",
       "contentLanguage": [
-        "hi",
         "en",
         "ja"
       ]
     },
     {
-      "id": "animezey",
-      "name": "AnimeZeY",
-      "description": "Movies via AnimeZeY, indexed by TMDB",
-      "version": "1.0.0",
-      "author": "Nuvio Team",
+      "id": "anikototv",
+      "name": "AniKotoTV",
+      "description": "AniKotoTV standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/anikototv.js",
       "supportedTypes": [
         "movie",
         "tv",
         "anime"
       ],
-      "filename": "providers/animezey.js",
       "enabled": true,
-      "hasSettings": true,
+      "hasSettings": false,
       "formats": [
         "mp4",
-        "mkv",
         "m3u8"
       ],
-      "logo": "https://i.postimg.cc/RVTy2djk/ainimezey.png",
       "contentLanguage": [
         "en",
-        "pt"
+        "ja"
       ]
     },
     {
-      "id": "kurage",
-      "name": "Kurage",
-      "description": "Kurage.live anime streaming with tRPC API and multi-server proxy support",
-      "version": "1.0.0",
-      "author": "Paregi12",
+      "id": "aniwaves",
+      "name": "Aniwaves",
+      "description": "Aniwaves standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/aniwaves.js",
       "supportedTypes": [
         "movie",
         "tv",
         "anime"
       ],
-      "filename": "providers/kurage.js",
       "enabled": true,
-      "hasSettings": true,
-      "resources": [
-        "stream"
-      ],
+      "hasSettings": false,
       "formats": [
-        "mkv",
+        "mp4",
         "m3u8"
       ],
-      "logo": "https://i.postimg.cc/3N2V7pHc/kurage.png",
+      "contentLanguage": [
+        "en",
+        "ja"
+      ]
+    },
+    {
+      "id": "anitaku",
+      "name": "Anitaku",
+      "description": "Anitaku standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/anitaku.js",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en",
+        "ja"
+      ]
+    },
+    {
+      "id": "miruro",
+      "name": "Miruro",
+      "description": "Miruro standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/miruro.js",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
       "contentLanguage": [
         "en",
         "ja"
@@ -298,61 +212,18 @@
     },
     {
       "id": "reanime",
-      "name": "Reanime",
-      "description": "Reanime anime streaming with automated AniList mapping and subtitle support",
-      "version": "1.0.0",
-      "author": "Nuvio Team",
+      "name": "ReAnime",
+      "description": "ReAnime standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/reanime.js",
       "supportedTypes": [
         "movie",
         "tv",
         "anime"
       ],
-      "filename": "providers/reanime.js",
       "enabled": true,
       "hasSettings": false,
-      "formats": [
-        "mkv",
-        "m3u8"
-      ],
-      "logo": "https://www.google.com/s2/favicons?domain=reanime.to&sz=128",
-      "contentLanguage": [
-        "en"
-      ]
-    },
-    {
-      "id": "topcartoons",
-      "name": "TopCartoons",
-      "description": "Popular cartoons streaming",
-      "version": "1.0.0",
-      "author": "Phisher",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
-      "filename": "providers/topcartoons.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "m3u8"
-      ],
-      "logo": "https://i.postimg.cc/3xVsbwp8/topcartoons.png",
-      "contentLanguage": [
-        "en"
-      ]
-    },
-    {
-      "id": "kickassanime",
-      "name": "KICKASSANIME",
-      "description": "kickassanime standalone anime scraper",
-      "version": "1.0.0",
-      "author": "Morrow",
-      "supportedTypes": [
-        "movie",
-        "tv",
-        "anime"
-      ],
       "formats": [
         "mp4",
         "m3u8"
@@ -360,9 +231,122 @@
       "contentLanguage": [
         "en",
         "ja"
+      ]
+    },
+    {
+      "id": "animeheaven",
+      "name": "AnimeHeaven",
+      "description": "AnimeHeaven standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/animeheaven.js",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
       ],
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en",
+        "ja"
+      ]
+    },
+    {
+      "id": "kurage",
+      "name": "Kurage",
+      "description": "Kurage standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/kurage.js",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en",
+        "ja"
+      ]
+    },
+    {
+      "id": "animezey",
+      "name": "AnimeZeY",
+      "description": "AnimeZeY standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/animezey.js",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en",
+        "ja"
+      ]
+    },
+    {
+      "id": "kickassanime",
+      "name": "KickassAnime",
+      "description": "KickassAnime standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
       "filename": "providers/kickassanime.js",
-      "enabled": true
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en",
+        "ja"
+      ]
+    },
+    {
+      "id": "anime-sama",
+      "name": "Anime-Sama",
+      "description": "Anime-Sama standalone high-speed anime scraper",
+      "version": "1.2.0",
+      "author": "Morrow",
+      "filename": "providers/anime-sama.js",
+      "supportedTypes": [
+        "movie",
+        "tv",
+        "anime"
+      ],
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "mp4",
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "en",
+        "ja"
+      ]
     }
   ]
 }

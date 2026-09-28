@@ -1,6 +1,6 @@
 /**
- * Standalone Bundled Scraper: AnimePahe
- * Source Site: https://animepahe.pw/
+ * Standalone Bundled Scraper: Miruro
+ * Source Site: https://www.miruro.to/
  */
 if (typeof setTimeout === 'undefined') {
     globalThis.setTimeout = function(fn) { try { fn(); } catch(e) {} return 1; };
@@ -363,4 +363,4 @@ function providerForSite(name, url) {
 
 
 
-module.exports = providerForSite("AnimePahe", "https://animepahe.pw/");
+module.exports = providerForSite("Miruro", "https://www.miruro.to/");
