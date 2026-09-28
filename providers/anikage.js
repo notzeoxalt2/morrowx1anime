@@ -7,12 +7,19 @@
 const TMDB_API_KEY = "439c478a771f35c05022f9feabcca01c";
 const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
 
-async function getTitleFromTmdb(tmdbId, mediaType) {
+async function getTitleFromTmdb(id, mediaType) {
   try {
-    const type = mediaType === "movie" ? "movie" : "tv";
-    const res = await fetch(`https://api.themoviedb.org/3/${type}/${tmdbId}?api_key=${TMDB_API_KEY}`);
+    const isImdb = String(id).startsWith("tt");
+    const url = isImdb
+      ? `https://api.themoviedb.org/3/find/${id}?api_key=${TMDB_API_KEY}&external_source=imdb_id`
+      : `https://api.themoviedb.org/3/${mediaType === "movie" ? "movie" : "tv"}/${id}?api_key=${TMDB_API_KEY}`;
+    const res = await fetch(url);
     if (!res.ok) return null;
     const json = await res.json();
+    if (isImdb) {
+      const match = (json.tv_results && json.tv_results[0]) || (json.movie_results && json.movie_results[0]);
+      return match ? (match.name || match.title || match.original_name) : null;
+    }
     return json.name || json.title || json.original_name || json.original_title || null;
   } catch {
     return null;
@@ -21,10 +28,10 @@ async function getTitleFromTmdb(tmdbId, mediaType) {
 
 async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
   try {
-    const safeEpisode = Number(episode) > 0 ? Number(episode) : 1;
+    const safeEpisode = Math.max(1, parseInt(episode, 10) || 1);
     let queryTitle = null;
 
-    if (/^\d+$/.test(String(tmdbId))) {
+    if (String(tmdbId).startsWith("tt") || /^\d+$/.test(String(tmdbId))) {
       queryTitle = await getTitleFromTmdb(tmdbId, mediaType);
     } else {
       queryTitle = String(tmdbId);
@@ -64,66 +71,80 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     const serversJson = await serversRes.json();
     const serverList = serversJson.servers || [];
 
-    // Prioritized real servers available on Anikage
-    const priorityServerIds = ['koto', 'megg', 'kiwi', 'wave', 'zen', 'suge', 'dib'];
-    const streams = [];
+    // Prioritized servers available on Anikage
+    const priorityServerIds = ['koto', 'megg', 'kiwi', 'wave', 'suge', 'dib'];
+    const fetchTasks = [];
 
     for (const s of priorityServerIds) {
       const sInfo = serverList.find(item => item.id === s);
       const subTypes = sInfo?.subTypes || ['sub', 'dub'];
 
       for (const t of subTypes) {
-        try {
-          const srcRes = await fetch(`https://anikage.cc/api/media/anime/${slug}/episodes/${safeEpisode}/sources?provider=${s}&type=${t}`, {
-            headers: {
-              'User-Agent': USER_AGENT,
-              'Referer': `https://anikage.cc/watch/${slug}?ep=${safeEpisode}`,
-              'Origin': 'https://anikage.cc'
-            }
-          });
-          if (!srcRes.ok) continue;
-          const srcJson = await srcRes.json();
-          const sources = srcJson.sources || [];
-          const subtitles = (srcJson.subtitles || []).map(sub => ({
-            url: sub.file ? `https://og.bakayaro.live/m3u8/${sub.file}` : sub.embedUrl,
-            language: sub.label || 'en',
-            name: sub.label || 'English'
-          })).filter(sub => sub.url);
-
-          const serverNameFormatted = s.charAt(0).toUpperCase() + s.slice(1);
-          const isDub = t === 'dub';
-
-          for (const src of sources) {
-            if (!src.url) continue;
-            const streamUrl = `https://og.bakayaro.live/${src.isM3U8 ? 'm3u8' : 'stream'}/${src.url}`;
-            const quality = src.quality || src.label || '1080p';
-            const typeTag = isDub ? '[DUB]' : '[SUB]';
-            const langDisplay = isDub ? '🗣️ English Dub' : '🇯🇵 Japanese Sub';
-
-            streams.push({
-              name: `Server ${serverNameFormatted} ${typeTag}`,
-              title: `Anikage • Server ${serverNameFormatted} ${typeTag} | ${langDisplay} (${quality})`,
-              url: streamUrl,
-              quality: quality,
-              language: isDub ? 'en' : 'ja',
-              type: isDub ? 'dub' : 'sub',
-              provider: 'Anikage',
+        fetchTasks.push((async () => {
+          try {
+            const srcRes = await fetch(`https://anikage.cc/api/media/anime/${slug}/episodes/${safeEpisode}/sources?provider=${s}&type=${t}`, {
               headers: {
-                'Referer': 'https://anikage.cc/',
-                'Origin': 'https://anikage.cc',
-                'User-Agent': USER_AGENT
-              },
-              subtitles: subtitles
+                'User-Agent': USER_AGENT,
+                'Referer': `https://anikage.cc/watch/${slug}?ep=${safeEpisode}`,
+                'Origin': 'https://anikage.cc'
+              }
             });
-          }
+            if (!srcRes.ok) return [];
+            const srcJson = await srcRes.json();
+            const sources = srcJson.sources || [];
+            const subtitles = (srcJson.subtitles || []).map(sub => ({
+              url: sub.file ? `https://og.bakayaro.live/m3u8/${sub.file}` : sub.embedUrl,
+              language: sub.label || 'en',
+              name: sub.label || 'English'
+            })).filter(sub => sub.url);
 
-          // Gentle delay to avoid Cloudflare rate limit
-          await new Promise(r => setTimeout(r, 120));
-        } catch (_) {}
+            const serverNameFormatted = s.charAt(0).toUpperCase() + s.slice(1);
+            const isDub = t === 'dub';
+            const results = [];
+
+            for (const src of sources) {
+              if (!src.url) continue;
+              const isM3u8 = src.isM3U8 !== false;
+              const streamUrl = `https://og.bakayaro.live/${isM3u8 ? 'm3u8' : 'stream'}/${src.url}`;
+              const quality = src.quality || src.label || '1080p';
+              const typeTag = isDub ? '[DUB]' : '[SUB]';
+              const langDisplay = isDub ? '🗣️ English Dub' : '🇯🇵 Japanese Sub';
+
+              results.push({
+                name: `Server ${serverNameFormatted} ${typeTag} • ${quality}`,
+                title: `Anikage • Server ${serverNameFormatted} ${typeTag} • ${quality} | ${langDisplay}`,
+                url: streamUrl,
+                quality: quality,
+                language: isDub ? 'en' : 'ja',
+                type: isM3u8 ? 'hls' : 'mp4',
+                provider: 'Anikage',
+                headers: {
+                  'Referer': 'https://anikage.cc/',
+                  'Origin': 'https://anikage.cc',
+                  'User-Agent': USER_AGENT
+                },
+                subtitles: subtitles
+              });
+            }
+            return results;
+          } catch (_) {
+            return [];
+          }
+        })());
       }
     }
 
-    return streams;
+    const settled = await Promise.all(fetchTasks);
+    const allStreams = settled.flat();
+
+    // Sort: 1080p first, then 720p, then others
+    allStreams.sort((a, b) => {
+      const qA = a.quality.includes('1080') ? 3 : a.quality.includes('720') ? 2 : 1;
+      const qB = b.quality.includes('1080') ? 3 : b.quality.includes('720') ? 2 : 1;
+      return qB - qA;
+    });
+
+    return allStreams;
   } catch (err) {
     console.error(`[Anikage] ${err && err.message ? err.message : err}`);
     return [];
