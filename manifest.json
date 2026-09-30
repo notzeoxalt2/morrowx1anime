@@ -1,13 +1,13 @@
 {
-  "name": "Morrow Anime 1",
-  "version": "1.6.3",
-  "description": "Verified standalone working anime providers for Morrow Anime 1",
+  "name": "Morrow Anime X1",
+  "version": "1.7.0",
+  "description": "Unified Morrow anime repository. Provider playback validation is tracked separately.",
   "scrapers": [
     {
       "id": "hianime",
       "name": "HiAnime",
-      "description": "HiAnime standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "HiAnime anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -28,8 +28,8 @@
     {
       "id": "animepahe",
       "name": "AnimePahe",
-      "description": "AnimePahe standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "AnimePahe anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -50,8 +50,8 @@
     {
       "id": "animesalt",
       "name": "AnimeSalt",
-      "description": "AnimeSalt standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "AnimeSalt anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -72,8 +72,8 @@
     {
       "id": "anidb",
       "name": "AniDB",
-      "description": "AniDB standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "AniDB anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -94,8 +94,8 @@
     {
       "id": "anikage",
       "name": "Anikage",
-      "description": "Anikage standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "Anikage anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -116,8 +116,8 @@
     {
       "id": "anikototv",
       "name": "AniKotoTV",
-      "description": "AniKotoTV standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "AniKotoTV anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -138,8 +138,8 @@
     {
       "id": "aniwaves",
       "name": "Aniwaves",
-      "description": "Aniwaves standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "Aniwaves anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -160,8 +160,8 @@
     {
       "id": "anitaku",
       "name": "Anitaku",
-      "description": "Anitaku standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "Anitaku anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -182,8 +182,8 @@
     {
       "id": "miruro",
       "name": "Miruro",
-      "description": "Miruro standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "Miruro anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -204,8 +204,8 @@
     {
       "id": "reanime",
       "name": "ReAnime",
-      "description": "ReAnime standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "ReAnime anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -226,8 +226,8 @@
     {
       "id": "animeheaven",
       "name": "AnimeHeaven",
-      "description": "AnimeHeaven standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "AnimeHeaven anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -248,13 +248,101 @@
     {
       "id": "kurage",
       "name": "Kurage",
-      "description": "Kurage standalone high-speed anime scraper",
-      "version": "1.6.3",
+      "description": "Kurage anime source adapter",
+      "version": "1.7.0",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
       ],
       "filename": "providers/kurage.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "m3u8",
+        "mp4"
+      ],
+      "contentLanguage": [
+        "ja",
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "animedekho",
+      "name": "AnimeDekho",
+      "description": "AnimeDekho anime source adapter",
+      "version": "1.7.0",
+      "author": "Morrow Team",
+      "supportedTypes": [
+        "anime"
+      ],
+      "filename": "providers/animedekho.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "m3u8",
+        "mp4"
+      ],
+      "contentLanguage": [
+        "ja",
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "anime-nexus",
+      "name": "Anime Nexus",
+      "description": "Anime Nexus anime source adapter",
+      "version": "1.7.0",
+      "author": "Morrow Team",
+      "supportedTypes": [
+        "anime"
+      ],
+      "filename": "providers/anime-nexus.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "m3u8",
+        "mp4"
+      ],
+      "contentLanguage": [
+        "ja",
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "lunarx",
+      "name": "LunarX",
+      "description": "LunarX anime source adapter",
+      "version": "1.7.0",
+      "author": "Morrow Team",
+      "supportedTypes": [
+        "anime"
+      ],
+      "filename": "providers/lunarx.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "m3u8",
+        "mp4"
+      ],
+      "contentLanguage": [
+        "ja",
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "saltanime",
+      "name": "SaltAnime",
+      "description": "SaltAnime anime source adapter",
+      "version": "1.7.0",
+      "author": "Morrow Team",
+      "supportedTypes": [
+        "anime"
+      ],
+      "filename": "providers/saltanime.js",
       "enabled": true,
       "hasSettings": false,
       "formats": [

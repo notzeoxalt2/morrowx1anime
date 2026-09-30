@@ -55,7 +55,7 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     const anime = animeList.find(a => {
       const rom = (a.title?.romaji || '').toLowerCase().replace(/[^a-z0-9]/g, '');
       const eng = (a.title?.english || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-      return rom.includes(normTitle) || eng.includes(normTitle) || normTitle.includes(rom) || normTitle.includes(eng);
+      return rom.includes(normTitle) || eng.includes(normTitle) || (rom && normTitle.includes(rom)) || (eng && normTitle.includes(eng));
     }) || animeList[0];
 
     const slug = anime.slug;
@@ -71,15 +71,12 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     const serversJson = await serversRes.json();
     const serverList = serversJson.servers || [];
 
-    // Prioritize top working direct servers: koto, megg, kiwi
-    const preferredServers = ['koto', 'megg', 'kiwi'];
-    const chosenServers = preferredServers.filter(s => serverList.some(item => item.id === s));
-    const targetServerIds = chosenServers.length ? chosenServers : serverList.slice(0, 3).map(item => item.id);
+    const targetServerIds = serverList.map(item => item.providerId || item.id);
     const fetchTasks = [];
 
     for (const s of targetServerIds) {
-      const sInfo = serverList.find(item => item.id === s);
-      const subTypes = sInfo?.subTypes || ['sub', 'dub'];
+      const sInfo = serverList.find(item => (item.providerId || item.id) === s);
+      const subTypes = sInfo?.subTypes || [];
 
       for (const t of subTypes) {
         fetchTasks.push((async () => {
@@ -93,9 +90,10 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
             });
             if (!srcRes.ok) return [];
             const srcJson = await srcRes.json();
+            if (srcJson.subType && srcJson.subType !== t) return [];
             const sources = srcJson.sources || [];
             const subtitles = (srcJson.subtitles || []).map(sub => ({
-              url: sub.file ? `https://og.bakayaro.live/m3u8/${sub.file}` : null,
+              url: sub.file ? (/^https?:\/\//i.test(sub.file) ? sub.file : `https://og.bakayaro.live/m3u8/${sub.file}`) : null,
               language: sub.label || 'en',
               name: sub.label || 'English'
             })).filter(sub => sub.url);
@@ -107,8 +105,8 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
             for (const src of sources) {
               if (!src.url) continue;
               const isM3u8 = src.isM3U8 !== false;
-              const streamUrl = `https://og.bakayaro.live/${isM3u8 ? 'm3u8' : 'stream'}/${src.url}`;
-              const quality = '1080p';
+              const streamUrl = /^https?:\/\//i.test(src.url) ? src.url : `https://og.bakayaro.live/${isM3u8 ? 'm3u8' : 'stream'}/${src.url}`;
+              const quality = src.resolution || 'Auto';
               const typeTag = isDub ? '[DUB]' : '[SUB]';
               const langDisplay = isDub ? '🗣️ English Dub' : '🇯🇵 Japanese Sub';
 
