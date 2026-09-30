@@ -1,6 +1,6 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "Unified Morrow anime repository. Provider playback validation is tracked separately.",
   "scrapers": [
     {
@@ -94,8 +94,8 @@
     {
       "id": "anikage",
       "name": "Anikage",
-      "description": "Anikage anime source adapter",
-      "version": "1.7.0",
+      "description": "Exact Anikage catalog matching and validated media sources",
+      "version": "1.7.2",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -353,6 +353,26 @@
         "ja",
         "en",
         "hi"
+      ]
+    },
+    {
+      "id": "kickassanime",
+      "name": "KickAssAnime",
+      "description": "Actual kaa.lt HLS player manifests; multi-audio where published by the host",
+      "version": "1.0.0",
+      "author": "Morrow Team",
+      "supportedTypes": [
+        "anime"
+      ],
+      "filename": "providers/kickassanime.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": [
+        "m3u8"
+      ],
+      "contentLanguage": [
+        "ja",
+        "en"
       ]
     }
   ]

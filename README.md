@@ -15,6 +15,7 @@ In Morrow, open **Settings → Providers → Install Morrow Providers**. For man
 - AnimeSalt
 - AniDB
 - Anikage
+- KickAssAnime (HLS)
 - AniKotoTV
 - Aniwaves
 - Anitaku

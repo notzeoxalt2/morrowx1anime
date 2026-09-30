@@ -28,7 +28,9 @@ async function getTitleFromTmdb(id, mediaType) {
 
 async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
   try {
-    const safeEpisode = Math.max(1, parseInt(episode, 10) || 1);
+    const context = globalThis.MORROW_MEDIA_CONTEXT || {};
+    const safeEpisode = Math.max(1, parseInt(context.animeEpisode || episode, 10) || 1);
+    if (!context.anilistId && Number(season) > 1) return [];
     let queryTitle = null;
 
     if (String(tmdbId).startsWith("tt") || /^\d+$/.test(String(tmdbId))) {
@@ -38,7 +40,7 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     }
 
     if (!queryTitle) return [];
-    const cleanTitle = queryTitle.trim();
+    const cleanTitle = String(context.animeTitle || queryTitle).trim();
 
     const searchRes = await fetch(`https://anikage.cc/api/media/anime/search?q=${encodeURIComponent(cleanTitle)}`, {
       headers: {
@@ -52,11 +54,12 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     if (!animeList.length) return [];
 
     const normTitle = cleanTitle.toLowerCase().replace(/[^a-z0-9]/g, '');
-    const anime = animeList.find(a => {
-      const rom = (a.title?.romaji || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-      const eng = (a.title?.english || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-      return rom.includes(normTitle) || eng.includes(normTitle) || (rom && normTitle.includes(rom)) || (eng && normTitle.includes(eng));
-    }) || animeList[0];
+    const matches = context.anilistId
+      ? animeList.filter(a => Number(a.anilistId) === Number(context.anilistId))
+      : animeList.filter(a => [a.title?.romaji, a.title?.english, a.title?.native]
+          .some(title => String(title || '').toLowerCase().replace(/[^a-z0-9]/g, '') === normTitle));
+    if (matches.length !== 1) return [];
+    const anime = matches[0];
 
     const slug = anime.slug;
     if (!slug) return [];
@@ -106,23 +109,29 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
               if (!src.url) continue;
               const isM3u8 = src.isM3U8 !== false;
               const streamUrl = /^https?:\/\//i.test(src.url) ? src.url : `https://og.bakayaro.live/${isM3u8 ? 'm3u8' : 'stream'}/${src.url}`;
+              const mediaHeaders = Object.assign({
+                'Referer': 'https://anikage.cc/', 'Origin': 'https://anikage.cc', 'User-Agent': USER_AGENT
+              }, srcJson.headers || {}, src.headers || {});
+              // Sources can contain an embed or an expired resolver response. Only expose media.
+              const media = await fetch(streamUrl, { method: isM3u8 ? "GET" : "HEAD", headers: mediaHeaders });
+              if (!media.ok) continue;
+              const contentType = media.headers.get('content-type') || '';
+              const manifest = /mpegurl/i.test(contentType) || isM3u8 ? await media.text() : '';
+              if (isM3u8 ? !manifest.trimStart().startsWith('#EXTM3U') : !/^video\//i.test(contentType)) continue;
+              const actualServerName = src.label || src.quality || serverNameFormatted;
               const quality = src.resolution || 'Auto';
               const typeTag = isDub ? '[DUB]' : '[SUB]';
               const langDisplay = isDub ? '🗣️ English Dub' : '🇯🇵 Japanese Sub';
 
               results.push({
-                name: `Server ${serverNameFormatted} ${typeTag} • ${quality}`,
+                name: `${serverNameFormatted} / ${actualServerName} ${typeTag} • ${quality}`,
                 title: `Anikage • Server ${serverNameFormatted} ${typeTag} • ${quality} | ${langDisplay}`,
                 url: streamUrl,
                 quality: quality,
                 language: isDub ? 'en' : 'ja',
-                type: isM3u8 ? 'hls' : 'mp4',
+                type: isM3u8 ? 'm3u8' : 'mp4',
                 provider: 'Anikage',
-                headers: {
-                  'Referer': 'https://anikage.cc/',
-                  'Origin': 'https://anikage.cc',
-                  'User-Agent': USER_AGENT
-                },
+                headers: mediaHeaders,
                 subtitles: subtitles
               });
             }
