@@ -51,3 +51,13 @@ $env:MORROW_LIVE_PROVIDER_TEST = '1'
 ```
 
 Live source retrieval, media decoding, and playback on a physical Android device are separate verification steps. A successful provider contract test does not certify every returned server's playback.
+
+## Anime catalog IDs and absolute episodes (Morrow desktop 0.1.31-alpha / mobile 0.4.27)
+
+Morrow now preserves namespaces for AniList, MAL and Kitsu IDs and maps them through AniZip to the metadata ID expected by existing adapters. It additionally supplies optional global MORROW_MEDIA_CONTEXT with originalId, anilistId, animeEpisode and animeTitle. The getStreams signature is unchanged. An adapter can use the explicit anime identity and anime-relative episode rather than assuming an anime catalog episode is TMDB S1 E[number]. Miruro uses this context and refuses a different AniList identity.
+
+A null final episode count denotes an ongoing show, not zero available episodes. Missing future-episode translations no longer invalidate an entire mapping response. TMDB episode names can differ from site translations; the Miruro fallback uses a unique air date within the same verified show ID, preferring exact dates and then matching titles when there is ambiguity.
+
+Verified live examples through PluginRepository -> conversion -> QuickJS: anilist:21 and kitsu:12 -> One Piece E1 (15 sources); mal:34566 -> Boruto E3 (13/14 sources depending on current server availability). A source for each show decoded through the actual Morrow desktop proxy and bundled libmpv: One Piece 1440x1080, Boruto 1920x1080. This does not certify every provider/server.
+
+AnimeSalt now rejects HTML embeds and unknown quality instead of presenting them as 1080p HLS. Its protected host extraction is still pending. Native fallback providers are skipped when an enabled installed adapter with the same provider name is present, preventing older results from replacing the updated adapter's group.

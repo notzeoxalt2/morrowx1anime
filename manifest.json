@@ -1,6 +1,6 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Unified Morrow anime repository. Provider playback validation is tracked separately.",
   "scrapers": [
     {
@@ -51,7 +51,7 @@
       "id": "animesalt",
       "name": "AnimeSalt",
       "description": "AnimeSalt anime source adapter",
-      "version": "1.7.0",
+      "version": "1.7.1",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -183,7 +183,7 @@
       "id": "miruro",
       "name": "Miruro",
       "description": "Miruro anime source adapter",
-      "version": "1.7.0",
+      "version": "1.7.1",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"

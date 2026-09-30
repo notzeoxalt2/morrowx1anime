@@ -71,7 +71,7 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     if (!seriesMatches.length) return [];
 
     const normTitle = cleanTitle.toLowerCase().replace(/[^a-z0-9]/g, '');
-    let bestSlug = seriesMatches[0][2];
+    let bestSlug = null;
     for (const m of seriesMatches) {
       const slug = m[2];
       const normSlug = slug.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -81,9 +81,9 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
       }
     }
 
+    if (!bestSlug) return [];
     const candidateUrls = [
       `https://animesalt.cx/episode/${bestSlug}-${safeSeason}x${safeEpisode}/`,
-      `https://animesalt.cx/episode/${bestSlug}-1x${safeEpisode}/`,
       `https://animesalt.cx/episode/${bestSlug}-episode-${safeEpisode}/`
     ];
 
@@ -120,14 +120,29 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
         for (const item of items) {
           const lang = item.language || 'English';
           const link = item.link;
-          if (!link) continue;
+          if (!link || !/^https?:\/\//i.test(link)) continue;
+          // Player embeds are HTML. They need host extraction before native playback.
+          let type = null;
+          try {
+            const response = await fetch(link, {headers: {'Referer':'https://animesalt.cx/','User-Agent':USER_AGENT}});
+            if (!response.ok) continue;
+            const mime = (response.headers.get('content-type') || '').toLowerCase();
+            if (mime.startsWith('video/')) type = 'mp4';
+            else if (mime.includes('mpegurl')) type = 'm3u8';
+            else if (mime.includes('dash+xml')) type = 'mpd';
+            else if (mime.includes('text/html')) continue;
+            else if ((await response.text()).trimStart().startsWith('#EXTM3U')) type = 'm3u8';
+          } catch (_) { continue; }
+          if (!type) continue;
 
           const isDub = lang.toLowerCase() !== 'japanese';
           const langCode = lang.toLowerCase() === 'english' ? 'en' :
                            lang.toLowerCase() === 'japanese' ? 'ja' :
                            lang.toLowerCase() === 'hindi' ? 'hi' :
                            lang.toLowerCase() === 'tamil' ? 'ta' :
-                           lang.toLowerCase() === 'telugu' ? 'te' : 'und';
+                           lang.toLowerCase() === 'telugu' ? 'te' :
+                           lang.toLowerCase() === 'kannada' ? 'kn' :
+                           lang.toLowerCase() === 'malayalam' ? 'ml' : 'und';
           const tag = isDub ? `[${lang} Dub]` : `[${lang} Sub]`;
           const langDisplay = isDub ? `🗣️ ${lang} Dub` : `🇯🇵 Japanese Sub`;
 
@@ -135,9 +150,9 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
             name: `AnimeSalt • Multi-Lang ${tag}`,
             title: `AnimeSalt • Multi-Lang Player ${tag} | ${langDisplay}`,
             url: link,
-            quality: '1080p',
+            quality: 'Auto',
             language: langCode,
-            type: 'hls',
+            type,
             provider: 'AnimeSalt',
             headers: {
               'Referer': 'https://animesalt.cx/',
