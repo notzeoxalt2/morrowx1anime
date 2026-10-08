@@ -125,7 +125,7 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
 
               results.push({
                 name: `${serverNameFormatted} / ${actualServerName} ${typeTag} • ${quality}`,
-                title: `Anikage • Server ${serverNameFormatted} ${typeTag} • ${quality} | ${langDisplay}`,
+                title: `${cleanTitle} · Episode ${safeEpisode} | Anikage • ${serverNameFormatted} ${typeTag} • ${quality} | ${langDisplay}`,
                 url: streamUrl,
                 quality: quality,
                 language: isDub ? 'en' : 'ja',
