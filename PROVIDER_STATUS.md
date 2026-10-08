@@ -4,7 +4,7 @@ Updated 2026-10-09. Stream discovery, valid manifests, decoded playback, and all
 
 | Provider | Evidence / remaining work |
 |---|---|
-| HiAnime | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
+| HiAnime | Genuine hianime.at catalog and episode API. Oct 9 all eight returned ZokoAnime SUB/DUB sources for Attack on Titan E1, One Piece E1/E2, Boruto E3 decoded at 1080p through Morrow QuickJS, proxy and libmpv. Native subtitles preserved. HD-1/MegaPlay metadata resolves, but the media CDN returns HTTP 403 and is excluded. Rendered app/phone checks remain pending. New hianime-site ID avoids reviving the retired alias. |
 | AnimePahe | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | AnimeSalt | Actual servers enumerated; Oct 9 One Piece E1/Naruto E1/Boruto E3 returned zero native sources. Abyss custom chunk transport remains unresolved; a media probe returned HTTP 403. Not verified working. |
 | AniDB | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |

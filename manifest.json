@@ -1,19 +1,19 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Unified Morrow anime adapters. Exact content and native playback evidence is listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
-      "id": "hianime",
+      "id": "hianime-site",
       "name": "HiAnime",
-      "description": "Legacy Anidap route previously displayed under this site name. Consolidated under the genuine Anidap adapter; separate site integration pending.",
-      "version": "1.8.0",
+      "description": "Genuine hianime.at catalog, exact episode/server API and ZokoAnime SUB/DUB HLS. MegaPlay metadata supported but inaccessible CDN streams excluded.",
+      "version": "1.8.2",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
       ],
-      "filename": "providers/hianime.js",
-      "enabled": false,
+      "filename": "providers/hianime-site.js",
+      "enabled": true,
       "hasSettings": false,
       "formats": [
         "m3u8",
@@ -21,8 +21,7 @@
       ],
       "contentLanguage": [
         "ja",
-        "en",
-        "hi"
+        "en"
       ],
       "logo": "https://static.everythingmoe.com/icons/hianime.png"
     },
