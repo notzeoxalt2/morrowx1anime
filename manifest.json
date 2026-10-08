@@ -1,6 +1,6 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Unified Morrow anime adapters. Exact content and native playback evidence is listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
@@ -97,7 +97,7 @@
       "id": "anikage",
       "name": "Anikage",
       "description": "Exact Anikage catalog matching and validated media sources",
-      "version": "1.8.0",
+      "version": "1.8.1",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -188,7 +188,7 @@
       "id": "miruro",
       "name": "Miruro",
       "description": "Miruro anime source adapter",
-      "version": "1.7.1",
+      "version": "1.8.1",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -405,7 +405,7 @@
         "ja",
         "en"
       ],
-      "version": "1.8.0",
+      "version": "1.8.1",
       "description": "Anidap actual catalog and stream API; exact requested anime and episode checks.",
       "logo": "https://static.everythingmoe.com/icons/anidap.png"
     },
@@ -427,7 +427,7 @@
         "ja",
         "en"
       ],
-      "version": "1.8.0",
+      "version": "1.8.1",
       "description": "Anistream actual catalog and stream API; exact requested anime and episode checks.",
       "logo": "https://static.everythingmoe.com/icons/anistream.png"
     },
@@ -449,7 +449,7 @@
         "ja",
         "en"
       ],
-      "version": "1.8.0",
+      "version": "1.8.1",
       "description": "AnimeX actual catalog and stream API; exact requested anime and episode checks.",
       "logo": "https://static.everythingmoe.com/icons/animexone.png"
     },

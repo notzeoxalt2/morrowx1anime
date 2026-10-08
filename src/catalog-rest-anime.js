@@ -76,7 +76,7 @@ async function validatedMediaType(url, headers) {
         if (mime.startsWith('video/')) return /\.mkv$/i.test(path) ? 'mkv' : 'mp4';
         if (mime.includes('text/html')) return null;
         const text = (await r.text()).trimStart();
-        if (text.startsWith('#EXTM3U')) return 'm3u8';
+        if (text.startsWith('#EXTM3U')) return await morrowAccessibleHls(url, headers, text) ? 'm3u8' : null;
         if (/^(?:<\?xml[^>]*>\s*)?<MPD\b/i.test(text)) return 'mpd';
     } catch (_) {}
     return null;

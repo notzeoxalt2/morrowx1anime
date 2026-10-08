@@ -8,25 +8,24 @@ Source adapters for the Morrow player. X1 combines the previous Anime 1 and Anim
 
 In Morrow, open **Settings → Providers → Install Morrow Providers**. For manual installation, add this repository’s raw `manifest.json` URL.
 
-## Catalog
+## Catalog and playback
 
-- HiAnime
-- AnimePahe
-- AnimeSalt
-- AniDB
 - Anikage
-- KickAssAnime (HLS)
-- AniKotoTV
-- Aniwaves
-- Anitaku
 - Miruro
 - ReAnime
 - AnimeHeaven
-- Kurage
-- AnimeDekho
-- Anime Nexus
-- LunarX
+- Anidap
+- Anistream
+- AnimeX
+- JustAnime
+
+These adapters have selected native playback evidence. The catalog also contains adapters still under investigation:
+
+- AnimeSalt
 - SaltAnime
+- KickAssAnime
+
+Retired aliases that fetched Anidap under unrelated site names are disabled. The complete requested-site list and unresolved work are in `PROVIDER_STATUS.md`.
 
 ## Playback status
 
@@ -41,3 +40,7 @@ Providers export `getStreams(id, mediaType, season, episode)`. Return direct med
 Version 1.8 adds genuine Anidap, Anistream and AnimeX adapters and replaces ReAnime/AnimeHeaven extraction with their actual site paths. ReAnime encoded playlists require Morrow Desktop 0.1.33 or Android 0.4.31. See PROVIDER_STATUS.md for tested samples and blocked hosts.
 
 Legacy scripts that queried Anidap while using other site names are disabled in 1.8.0. Their real routes are consolidated under Anidap with exact catalog/episode checks. Separate integrations remain tracked in PROVIDER_STATUS.md.
+
+Version 1.8.1 checks the first HLS media segment before returning Miruro, Anikage and catalog REST streams. Some inaccessible server routes therefore return no choice. Miruro HD-1 image-wrapped transport segments require Morrow Desktop 0.1.34 or Android 0.4.32.
+
+On October 9, all 21 returned Boruto episode 3 choices from Miruro (12), Anikage (4) and Anidap (5) decoded through Morrow's actual plugin runtime, proxy and Windows player. This includes Miruro HD-1 SUB and DUB. This is sample evidence; it does not certify every title, server or device.

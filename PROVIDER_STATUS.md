@@ -92,3 +92,8 @@ Updated 2026-10-09. Stream discovery, valid manifests, decoded playback, and all
 | Anime-Dunya | Requested site catalogued; genuine native adapter not yet implemented or verified. |
 | Kayoanimetv | Requested site catalogued; genuine native adapter not yet implemented or verified. |
 | AnimeWorld | Requested site catalogued; genuine native adapter not yet implemented or verified. |
+# October 9, version 1.8.1 playback recheck
+
+All returned Boruto episode 3 choices decoded using Morrow's actual QuickJS plugin runtime, local HTTP proxy and bundled libmpv: Miruro 12/12, Anikage 4/4, Anidap 5/5. Miruro HD-1 SUB and DUB decoded at 1080p after image-wrapped MPEG-TS transport was corrected in Desktop 0.1.34 / Android 0.4.32.
+
+The adapters now check the first media segment, including request headers. Routes with inaccessible segments are omitted rather than advertised as playable. This check does not guarantee every segment, quality, encryption key or device. Counts can vary with host availability. No certification of every requested integration is implied.
