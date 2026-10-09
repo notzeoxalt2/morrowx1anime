@@ -30,7 +30,7 @@ async function metadata(id,type,season,episode) {
   }
   const show=await requestJson('https://api.themoviedb.org/3/'+mediaType+'/'+tmdbId+'?api_key='+key);
   const info={title:show.name||show.title,original:show.original_name||show.original_title,tmdbId,mediaType,season,year:Number((show.first_air_date||show.release_date||'').slice(0,4))};
-  if(mediaType==='tv'&&!globalThis.MORROW_MEDIA_CONTEXT?.anilistId) {
+  if(mediaType==='tv'&&Number(season)>1&&!globalThis.MORROW_MEDIA_CONTEXT?.anilistId) {
     info.requestedEpisode=await requestJson('https://api.themoviedb.org/3/tv/'+tmdbId+'/season/'+season+'/episode/'+episode+'?api_key='+key);
     if(Number(info.requestedEpisode.season_number)!==season||Number(info.requestedEpisode.episode_number)!==episode)return null;
   }

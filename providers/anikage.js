@@ -50,7 +50,8 @@ async function getStreams(tmdbId, mediaType = "tv", season = 1, episode = 1) {
     });
     if (!searchRes.ok) return [];
     const searchJson = await searchRes.json();
-    const animeList = searchJson.data || [];
+    const animeList = (searchJson.data || []).filter(a =>
+      mediaType === 'movie' ? a.format === 'MOVIE' : a.format !== 'MOVIE');
     if (!animeList.length) return [];
 
     const normTitle = cleanTitle.toLowerCase().replace(/[^a-z0-9]/g, '');

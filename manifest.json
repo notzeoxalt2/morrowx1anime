@@ -1,6 +1,6 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "Unified Morrow anime adapters. Exact content and native playback evidence is listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
@@ -51,8 +51,8 @@
     {
       "id": "animesalt",
       "name": "AnimeSalt",
-      "description": "AnimeSalt anime source adapter",
-      "version": "1.8.0",
+      "description": "Actual AnimeSalt catalog and MyStream multi-audio HLS; exact episode identity and native segment validation. Abyss transport remains unsupported.",
+      "version": "1.8.3",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -68,7 +68,8 @@
         "ja",
         "en",
         "hi"
-      ]
+      ],
+      "logo": "https://static.everythingmoe.com/icons/default.png"
     },
     {
       "id": "anidb",
@@ -96,7 +97,7 @@
       "id": "anikage",
       "name": "Anikage",
       "description": "Exact Anikage catalog matching and validated media sources",
-      "version": "1.8.1",
+      "version": "1.8.3",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -187,7 +188,7 @@
       "id": "miruro",
       "name": "Miruro",
       "description": "Miruro anime source adapter",
-      "version": "1.8.1",
+      "version": "1.8.3",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -347,7 +348,7 @@
       "id": "saltanime",
       "name": "SaltAnime",
       "description": "SaltAnime anime source adapter",
-      "version": "1.8.0",
+      "version": "1.8.3",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
