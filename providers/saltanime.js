@@ -33,8 +33,16 @@ async function saltMetadata(id,type,episode) {
     if(key){const endpoint=/^tt/.test(raw)?'find/'+raw:'/'+(type==='movie'?'movie':'tv')+'/'+raw;try{const r=await saltFetch('https://api.themoviedb.org/3/'+endpoint.replace(/^\//,'')+'?api_key='+encodeURIComponent(key)+(/^tt/.test(raw)?'&external_source=imdb_id':''));if(r.ok){let j=await r.json();if(/^tt/.test(raw)){const list=type==='movie'?j.movie_results:j.tv_results;if(!list||list.length!==1)return null;j=list[0];}for(const t of [j.name,j.title,j.original_name,j.original_title])if(t&&!titles.includes(t))titles.push(t);}}catch(_) {}}
   }
   if(!titles.length)return null;
-  const absolute=Number(context.animeEpisode);
-  return {titles,tv:type!=='movie',absolute:Number.isInteger(absolute)&&absolute>0?absolute:null,relativeEpisode:Math.max(1,parseInt(episode,10)||1)};
+  // Morrow exposes animeEpisode as the provider's selected numbering mode:
+  // for these season-aware site catalogs it is season-local. Only consume the
+  // separate absolute field when the provider explicitly requests flat numbering.
+  const absolute=String(context.animeEpisodeNumbering||'season-local').toLowerCase()==='absolute'
+    ? Number(context.animeEpisodeAbsolute) : NaN;
+  const mappedAbsolute=Number(context.animeEpisodeAbsolute);
+  const relative=Number(context.animeSeasonEpisode||episode);
+  return {titles,tv:type!=='movie',absolute:Number.isInteger(absolute)&&absolute>0?absolute:null,
+    mappedAbsolute:Number.isInteger(mappedAbsolute)&&mappedAbsolute>0?mappedAbsolute:null,
+    relativeEpisode:Number.isInteger(relative)&&relative>0?relative:Math.max(1,parseInt(episode,10)||1)};
 }
 function saltPageLinks(html,base,category) { const out=[];for(const m of html.matchAll(/<a\b[^>]*\bhref\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){const u=saltUrl(m[1],base);if(!u)continue;const path=new URL(u).pathname;if(!new RegExp('^/(?:'+category+')/[^/]+/?$').test(path))continue;const slug=path.split('/')[2];if(!out.some(v=>v.url===u))out.push({url:u,slug,label:saltText(m[2])});}return out; }
 async function saltCatalog(target) {
@@ -52,7 +60,13 @@ function saltEpisode(catalog,target,season) {
   if(target.absolute){const matches=unique.filter(v=>v.sourceEpisode===target.absolute);return matches.length===1?matches[0]:null;}
   // Site numbering can be absolute inside a TMDB-like season (One Piece S2 starts at 62).
   const matches=unique.filter(v=>v.sourceSeason===season).sort((a,b)=>a.sourceEpisode-b.sourceEpisode);
-  return matches[target.relativeEpisode-1]||null;
+  // Site episode slugs use SxE, but the number after x may be absolute
+  // (e.g. One Piece S2E62). Select the requested position within that season.
+  const mapped=target.mappedAbsolute==null?[]:matches.filter(v=>v.sourceEpisode===target.mappedAbsolute);
+  if(mapped.length===1)return mapped[0];
+  const selected=matches[target.relativeEpisode-1];
+  const expectedSourceEpisode=(matches[0]?.sourceEpisode||0)+target.relativeEpisode-1;
+  return selected&&selected.sourceEpisode===expectedSourceEpisode?selected:null;
 }
 function saltEmbeds(html,page) {
   const out=[];

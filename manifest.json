@@ -1,6 +1,6 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "description": "Unified Morrow anime adapters. Exact content and native playback evidence is listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
@@ -52,11 +52,12 @@
       "id": "animesalt",
       "name": "AnimeSalt",
       "description": "Actual AnimeSalt catalog and MyStream multi-audio HLS; exact episode identity and native segment validation. Abyss transport remains unsupported.",
-      "version": "1.8.3",
+      "version": "1.8.4",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
       ],
+      "animeEpisodeNumbering": "season-local",
       "filename": "providers/animesalt.js",
       "enabled": true,
       "hasSettings": false,
@@ -348,11 +349,12 @@
       "id": "saltanime",
       "name": "SaltAnime",
       "description": "SaltAnime anime source adapter",
-      "version": "1.8.3",
+      "version": "1.8.4",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
       ],
+      "animeEpisodeNumbering": "season-local",
       "filename": "providers/saltanime.js",
       "enabled": true,
       "hasSettings": false,
