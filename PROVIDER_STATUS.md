@@ -1,25 +1,25 @@
 # Provider verification status
 
-Updated 2026-10-09. Stream discovery, valid manifests, decoded playback, and all-server coverage are different checks. These records describe the evidence actually obtained.
+Updated 2026-10-30 for Anime X1 1.8.7. Stream discovery, valid manifests, decoded playback, and all-server coverage are different checks. These records describe the evidence actually obtained.
 
 | Provider | Evidence / remaining work |
 |---|---|
 | HiAnime | Genuine hianime.at catalog and episode API. Oct 9 all eight returned ZokoAnime SUB/DUB sources for Attack on Titan E1, One Piece E1/E2, Boruto E3 decoded at 1080p through Morrow QuickJS, proxy and libmpv. Native subtitles preserved. HD-1/MegaPlay metadata resolves, but the media CDN returns HTTP 403 and is excluded. One Piece S1E1 DUB also rendered in the Windows app. Other rendered-app/phone checks remain pending. New hianime-site ID avoids reviving the retired alias. |
 | AnimePahe | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
-| AnimeSalt | Oct 9 actual IMDb-to-TMDB requests for One Piece S1E1 and Naruto S1E1 resolved current MyStream HLS through Morrow QuickJS. English and Japanese video/audio decoded at 1080p through Morrow proxy/libmpv (four checks). One Piece has seven audio tracks, Naruto five. Boruto current MegaPlay and Abyss transport remain unresolved; rendered-app/phone checks pending. |
+| AnimeSalt | Oct 9 One Piece S1E1 and Naruto S1E1 MyStream checks decoded at 1080p through Morrow. Oct 30 live X1 1.8.7 sample decoded Naruto S5E41 and Mushoku Tensei Cour 2 S1E23; Naruto's site slug used `5x220` while the returned label stayed S5E41. MyStream only; multi-audio is declared `und`, so it does not prove Hindi availability. Boruto MegaPlay and Abyss transport remain unresolved; all-title/all-server checks are pending. |
 | AniDB | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | Anikage | Oct 9 actual IMDb series requests for One Piece S1E1/E2 returned 5/1 validated sources after excluding same-title movies from TV search. Prior selected One Piece/Boruto Koto sources decoded at 1080p. All server/audio/title combinations and later-season TMDB mapping are not certified. |
 | AniKotoTV | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | Aniwaves | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | Anitaku | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | Miruro | Oct 9 actual IMDb series requests for One Piece S1E1/E2 returned 15/13 validated sources including SUB and DUB. Removed unsupported catalog episode-list dependency for season 1. Previous native decode evidence remains; later-season TMDB mapping and every server/title are not certified. |
-| ReAnime | Actual catalog and FlixCloud playlist transport implemented; selected One Piece E1 HD-1 decoded at 1080p through Morrow on Sept 30. Oct 9 regression check pending; every server/title not certified. |
+| ReAnime | Actual catalog, episode, FlixCloud, and playlist transport. Oct 30 current-host Morrow runtime and bundled libmpv decoded Re:Zero S1E1, Re:Zero S4E3, and Attack on Titan S2E12 at 1080p. Handles title punctuation differences (such as `Re:ZERO` versus `ReZERO`), parses season/episode from release names without consuming adjacent resolution digits, supports exact-title rows with a missing AniList ID, rejects conflicting IDs, and deduplicates identical embed URLs before extraction. Three named samples only; every server/title is not certified. |
 | AnimeHeaven | Actual site catalog/episode and MP4 integration. Oct 9 selected One Piece E1 CX source decoded at 720p through Morrow. Other titles/CDNs not certified. |
 | Kurage | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | AnimeDekho | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | Anime Nexus | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | LunarX | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
-| SaltAnime | Correct current catalog implemented; observed wrong-content host titles rejected. No verified native sources. |
+| SaltAnime | Correct catalog and mapped season suffixes. Oct 30 live Morrow sample decoded Mushoku Tensei Cour 2 S1E23 with the requested label; the Naruto S5E41 live request returned no source. A season/episode contract test covers lookup suffix versus requested output label. MyStream only was observed; all site streams/languages and later seasons are not certified. |
 | KickAssAnime | Genuine HLS adapter delivered previously; selected playback tested. Every server and title not certified. |
 | Anidap | Oct 9 exact One Piece E1 and Boruto E3 queries each returned 8 validated sources; selected Nero SUB decoded at 1080p through Morrow. |
 | Anistream | Oct 9 actual site catalog/stream API returned 8 validated sources for each tested One Piece E1/Boruto E3 query; selected Nero SUB decoded at 1080p. |

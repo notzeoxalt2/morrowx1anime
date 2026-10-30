@@ -1,6 +1,6 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.8.4",
+  "version": "1.8.7",
   "description": "Unified Morrow anime adapters. Exact content and native playback evidence is listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
@@ -23,7 +23,8 @@
         "ja",
         "en"
       ],
-      "logo": "https://static.everythingmoe.com/icons/hianime.png"
+      "logo": "https://static.everythingmoe.com/icons/hianime.png",
+      "animeEpisodeNumbering": "anilist-entry"
     },
     {
       "id": "animepahe",
@@ -52,7 +53,7 @@
       "id": "animesalt",
       "name": "AnimeSalt",
       "description": "Actual AnimeSalt catalog and MyStream multi-audio HLS; exact episode identity and native segment validation. Abyss transport remains unsupported.",
-      "version": "1.8.4",
+      "version": "1.8.7",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -115,7 +116,8 @@
         "en",
         "hi"
       ],
-      "logo": "https://static.everythingmoe.com/icons/anicore.png"
+      "logo": "https://static.everythingmoe.com/icons/anicore.png",
+      "animeEpisodeNumbering": "anilist-entry"
     },
     {
       "id": "anikototv",
@@ -206,13 +208,14 @@
         "en",
         "hi"
       ],
-      "logo": "https://static.everythingmoe.com/icons/miruro.png"
+      "logo": "https://static.everythingmoe.com/icons/miruro.png",
+      "animeEpisodeNumbering": "anilist-entry"
     },
     {
       "id": "reanime",
       "name": "ReAnime",
       "description": "ReAnime anime source adapter",
-      "version": "1.8.0",
+      "version": "1.8.7",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -229,7 +232,8 @@
         "en",
         "hi"
       ],
-      "logo": "https://static.everythingmoe.com/icons/reanime.png"
+      "logo": "https://static.everythingmoe.com/icons/reanime.png",
+      "animeEpisodeNumbering": "anilist-entry"
     },
     {
       "id": "animeheaven",
@@ -252,7 +256,8 @@
         "en",
         "hi"
       ],
-      "logo": "https://static.everythingmoe.com/icons/animeheavenme.png"
+      "logo": "https://static.everythingmoe.com/icons/animeheavenme.png",
+      "animeEpisodeNumbering": "absolute"
     },
     {
       "id": "kurage",
@@ -349,7 +354,7 @@
       "id": "saltanime",
       "name": "SaltAnime",
       "description": "SaltAnime anime source adapter",
-      "version": "1.8.4",
+      "version": "1.8.7",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -387,7 +392,8 @@
         "ja",
         "en"
       ],
-      "logo": "https://static.everythingmoe.com/icons/kaa.png"
+      "logo": "https://static.everythingmoe.com/icons/kaa.png",
+      "animeEpisodeNumbering": "anilist-entry"
     },
     {
       "id": "anidap",
@@ -409,7 +415,8 @@
       ],
       "version": "1.8.1",
       "description": "Anidap actual catalog and stream API; exact requested anime and episode checks.",
-      "logo": "https://static.everythingmoe.com/icons/anidap.png"
+      "logo": "https://static.everythingmoe.com/icons/anidap.png",
+      "animeEpisodeNumbering": "anilist-entry"
     },
     {
       "id": "anistream",
@@ -431,7 +438,8 @@
       ],
       "version": "1.8.1",
       "description": "Anistream actual catalog and stream API; exact requested anime and episode checks.",
-      "logo": "https://static.everythingmoe.com/icons/anistream.png"
+      "logo": "https://static.everythingmoe.com/icons/anistream.png",
+      "animeEpisodeNumbering": "anilist-entry"
     },
     {
       "id": "animex",
@@ -453,7 +461,8 @@
       ],
       "version": "1.8.1",
       "description": "AnimeX actual catalog and stream API; exact requested anime and episode checks.",
-      "logo": "https://static.everythingmoe.com/icons/animexone.png"
+      "logo": "https://static.everythingmoe.com/icons/animexone.png",
+      "animeEpisodeNumbering": "anilist-entry"
     },
     {
       "id": "justanime",
@@ -475,7 +484,8 @@
       ],
       "version": "1.8.0",
       "description": "Actual JustAnime catalog, exact requested episode and listed SUB/DUB servers. Selected One Piece E1 and Boruto E3 decoded at 1080p through Morrow.",
-      "logo": "https://static.everythingmoe.com/icons/justanime.png"
+      "logo": "https://static.everythingmoe.com/icons/justanime.png",
+      "animeEpisodeNumbering": "anilist-entry"
     }
   ]
 }

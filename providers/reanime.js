@@ -83,7 +83,7 @@ async function fcExtract(embed, referer){
 
 // Genuine Re:Anime catalog and current FlixCloud hosts. Media context supplies anime-relative episodes.
 const RE_ROOT='https://reanime.to';
-function reNorm(s){return String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();}
+function reNorm(s){return String(s||'').replace(/^\s*(?:\[[^\]]+\]\s*)+/,'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();}
 async function reJson(url){const r=await fetch(url,{headers:{Referer:RE_ROOT+'/',Accept:'application/json'}});if(!r.ok)throw new Error('ReAnime HTTP '+r.status);return r.json();}
 async function getStreams(id,mediaType='tv',season=1,episode=1){
   try{
@@ -97,36 +97,54 @@ async function getStreams(id,mediaType='tv',season=1,episode=1){
     for(const title of [...new Set(aliases)].slice(0,3)){
       const search=await reJson(RE_ROOT+'/api/v1/search?q='+encodeURIComponent(title)+'&limit=40&offset=0');
       for(const row of search.results||[]){
-        const exactId=context.anilistId&&Number(row.anilist_id)===Number(context.anilistId);
+        const rowAniListId=Number(row.anilist_id)||0;
+        const exactId=context.anilistId&&rowAniListId===Number(context.anilistId);
         const exactTitle=Object.values(row.title||{}).some(t=>aliases.some(a=>reNorm(t)===reNorm(a)));
-        if((context.anilistId?exactId:exactTitle)&&((mediaType==='movie')===String(row.format).toUpperCase().includes('MOVIE')))hits.set(row.anime_id,row);
+        const missingIdTitleMatch=!!context.anilistId&&!rowAniListId&&exactTitle;
+        if((context.anilistId?(exactId||missingIdTitleMatch):exactTitle)&&((mediaType==='movie')===String(row.format).toUpperCase().includes('MOVIE')))hits.set(row.anime_id,row);
       }
     }
     if(hits.size!==1)return [];
-    const show=[...hits.values()][0],watch=RE_ROOT+'/watch/'+encodeURIComponent(show.anime_id)+'?ep='+number;
+    const show=[...hits.values()][0],resolvedAniListId=Number(show.anilist_id)||Number(context.anilistId)||0;
+    if(!resolvedAniListId)return [];
+    const watch=RE_ROOT+'/watch/'+encodeURIComponent(show.anime_id)+'?ep='+number;
     const data=await reJson(RE_ROOT+'/api/v1/watch/'+encodeURIComponent(show.anime_id)+'?ep='+number);
-    if(!data.anime||data.anime.anime_id!==show.anime_id||!Number(show.anilist_id))return [];
+    const responseAniListId=Number(data.anime&&data.anime.anilist_id)||0;
+    if(!data.anime||data.anime.anime_id!==show.anime_id||(responseAniListId&&responseAniListId!==resolvedAniListId))return [];
     const catalog=await reJson(RE_ROOT+'/api/v1/anime/'+encodeURIComponent(show.anime_id)+'/episodes?number='+number+'&limit=1');
     const selected=(catalog.data||[]).filter(e=>Number(e.episode_number)===number);
     if(selected.length!==1||selected[0].playable===false)return [];
-    const options=await reJson(RE_ROOT+'/api/flix/'+show.anilist_id+'/'+number);
+    const options=await reJson(RE_ROOT+'/api/flix/'+resolvedAniListId+'/'+number);
     if(!options.success)return [];
     const servers=new Map();
-    for(const item of options.servers||[])if(item.dataLink&&item.serverName)servers.set(item.serverName+'|'+item.dataLink,item);
+    for(const item of options.servers||[])if(item.dataLink&&item.serverName&&!servers.has(item.dataLink))servers.set(item.dataLink,item);
     const streams=await Promise.all([...servers.values()].map(async server=>{
       try{
         const source=await fcExtract(server.dataLink,watch);if(!source)return null;
         const hostTitle = reNorm(source.videoTitle);
-        const titleAliases = Object.values(show.title || {}).concat(aliases).filter(Boolean).map(reNorm);
-        const matchedAlias = titleAliases.find(alias => hostTitle.startsWith(alias + ' '));
+        const titleAliases = [...new Set(Object.values(show.title || {}).concat(aliases).filter(Boolean).flatMap(value=>{
+          const normalized=reNorm(value);
+          return [normalized,normalized.replace(/\b(?:season|cour|part)\s+\d+\b/g,' ').replace(/\s+/g,' ').trim()];
+        }))].sort((a,b)=>b.length-a.length);
+        // Release filenames often collapse punctuation inside names (Re:ZERO -> ReZERO).
+        // Compare normalized compact prefixes so title spelling does not hide the episode tag.
+        const compactHostTitle=hostTitle.replace(/\s/g,'');
+        const matchedAlias = titleAliases.find(alias => compactHostTitle.startsWith(alias.replace(/\s/g,'')));
         if (!matchedAlias) return null;
-        const hostEpisode = hostTitle.slice(matchedAlias.length).match(/(?:^|\s)(?:episode\s*|ep\s*|e\s*)?0*(\d+)(?:\s|$)/);
-        if (mediaType !== 'movie' && (!hostEpisode || Number(hostEpisode[1]) !== number)) return null;
+        const aliasLength = matchedAlias.replace(/\s/g,'').length;
+        let consumed=0, hostIndex=0;
+        while(hostIndex<hostTitle.length&&consumed<aliasLength){if(/[a-z0-9]/.test(hostTitle[hostIndex]))consumed++;hostIndex++;}
+        const hostRemainder = hostTitle.slice(hostIndex).trimStart();
+        const seasonEpisode = hostRemainder.match(/\bs\s*0*(\d{1,2})\s*e\s*0*(\d+)\b/);
+        const episodeOnly = hostRemainder.match(/(?:^|\s)(?:episode\s*|ep\s*|e\s*)0*(\d+)(?:\s|$)/);
+        const hostEpisode = seasonEpisode ? Number(seasonEpisode[2]) : Number(episodeOnly&&episodeOnly[1]);
+        const requestedSeason = Math.max(1,Number(season)||1);
+        if (mediaType !== 'movie' && (!hostEpisode || hostEpisode !== number || (seasonEpisode && Number(seasonEpisode[1]) !== requestedSeason))) return null;
         const multi=source.audioType==='dual'||/#EXT-X-MEDIA:.*TYPE=AUDIO/.test(source.playlist);
         // One published dual-audio manifest represents both site SUB and DUB options.
         // Keep its native tracks instead of calling the Japanese default an English dub.
         const language=multi?'und':server.dataType==='dub'?'en':'ja';
-        return {provider:'ReAnime',name:'ReAnime | '+server.serverName+' ['+(multi?'Multi audio':server.dataType==='dub'?'DUB':'SUB')+']',title:(show.title.english||show.title.romaji||aliases[0])+' • Episode '+number+' • '+server.serverName,url:source.url,type:'m3u8',quality:'Auto',language,headers:source.headers,subtitles:source.subtitles};
+        return {provider:'ReAnime',name:'ReAnime | '+server.serverName+' ['+(multi?'Multi audio':server.dataType==='dub'?'DUB':'SUB')+']',title:(show.title.english||show.title.romaji||aliases[0])+' • S'+requestedSeason+' E'+number+' • '+server.serverName,url:source.url,type:'m3u8',quality:'Auto',language,headers:source.headers,subtitles:source.subtitles};
       }catch(_){return null;}
     }));
     return streams.filter(Boolean);
