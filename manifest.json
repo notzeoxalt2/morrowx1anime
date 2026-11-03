@@ -1,6 +1,6 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.8.8",
+  "version": "1.8.9",
   "description": "Unified Morrow anime adapters. Exact content and native playback evidence is listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
@@ -52,11 +52,13 @@
     {
       "id": "animesalt",
       "name": "AnimeSalt",
-      "description": "Actual AnimeSalt catalog and MyStream multi-audio HLS; exact episode identity and native segment validation. Abyss transport remains unsupported.",
-      "version": "1.8.7",
+      "description": "Season-aware AnimeSalt catalog with exact episode routes and MyStream multi-audio track labels. Hindi Abyss is offered as a browser handoff, not direct in-app playback.",
+      "version": "1.8.8",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime"
+        "anime",
+        "movie",
+        "tv"
       ],
       "animeEpisodeNumbering": "season-local",
       "filename": "providers/animesalt.js",
@@ -353,11 +355,13 @@
     {
       "id": "saltanime",
       "name": "SaltAnime",
-      "description": "SaltAnime anime source adapter",
-      "version": "1.8.7",
+      "description": "Season-aware SaltAnime catalog with exact episode routes and MyStream multi-audio track labels; Hindi is available when exposed by the selected stream.",
+      "version": "1.8.8",
       "author": "Morrow Team",
       "supportedTypes": [
-        "anime"
+        "anime",
+        "movie",
+        "tv"
       ],
       "animeEpisodeNumbering": "season-local",
       "filename": "providers/saltanime.js",

@@ -1,12 +1,12 @@
 # Provider verification status
 
-Updated 2026-11-03; Anime X1 1.8.8 is the current working-tree candidate. Stream discovery, valid manifests, decoded playback, and all-server coverage are different checks. These records describe the evidence actually obtained.
+Updated 2026-11-03; Anime X1 1.8.9 is the current working-tree candidate. Stream discovery, valid manifests, decoded playback, and all-server coverage are different checks. These records describe the evidence actually obtained.
 
 | Provider | Evidence / remaining work |
 |---|---|
 | HiAnime | Genuine hianime.at catalog and episode API. Oct 9 all eight returned ZokoAnime SUB/DUB sources for Attack on Titan E1, One Piece E1/E2, Boruto E3 decoded at 1080p through Morrow QuickJS, proxy and libmpv. Native subtitles preserved. HD-1/MegaPlay metadata resolves, but the media CDN returns HTTP 403 and is excluded. One Piece S1E1 DUB also rendered in the Windows app. Other rendered-app/phone checks remain pending. New hianime-site ID avoids reviving the retired alias. |
 | AnimePahe | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
-| AnimeSalt | Oct 9 One Piece S1E1 and Naruto S1E1 MyStream checks decoded at 1080p through Morrow. Oct 30 live X1 1.8.7 sample decoded Naruto S5E41 and Mushoku Tensei Cour 2 S1E23; Naruto's site slug used `5x220` while the returned label stayed S5E41. MyStream only; multi-audio is declared `und`, so it does not prove Hindi availability. Boruto MegaPlay and Abyss transport remain unresolved; all-title/all-server checks are pending. |
+| AnimeSalt | Nov 3: synced the season-aware desktop adapter into X1 1.8.9; Ben 10: Classic S4E13 now resolves the requested S4E13 route and returns MyStream plus a Hindi Abyss browser handoff. MyStream decoded at 1920×1080 through Morrow's local proxy and bundled libmpv. Naruto Shippuden S22E42 (site route E500) also returned the requested SUB/DUB labels and decoded at 1080p. Hindi is reported from exposed multi-audio metadata; Abyss is not direct in-app playback. Selected samples only, not all titles/servers. |
 | AniDB | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | Anikage | Oct 9 actual IMDb series requests for One Piece S1E1/E2 returned 5/1 validated sources after excluding same-title movies from TV search. Prior selected One Piece/Boruto Koto sources decoded at 1080p. All server/audio/title combinations and later-season TMDB mapping are not certified. |
 | AniKotoTV | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
@@ -19,7 +19,7 @@ Updated 2026-11-03; Anime X1 1.8.8 is the current working-tree candidate. Stream
 | AnimeDekho | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | Anime Nexus | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | LunarX | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
-| SaltAnime | Correct catalog and mapped season suffixes. Oct 30 live Morrow sample decoded Mushoku Tensei Cour 2 S1E23 with the requested label; the Naruto S5E41 live request returned no source. A season/episode contract test covers lookup suffix versus requested output label. MyStream only was observed; all site streams/languages and later seasons are not certified. |
+| SaltAnime | Nov 3: synced the season-aware desktop adapter into X1 1.8.9. Naruto Shippuden S22E42 (site route E500) returned the correct SUB label and decoded at 1080p through Morrow's proxy and bundled libmpv. Ben 10: Classic S4E13 route-matching and rejected-wrong-episode fixtures pass; the live cartoon check was made against AnimeSalt. Hindi is listed only when the selected MyStream exposes that audio track. Selected samples only, not all titles/servers. |
 | KickAssAnime | Genuine HLS adapter delivered previously; selected playback tested. Every server and title not certified. |
 | Anidap | Oct 9 exact One Piece E1 and Boruto E3 queries each returned 8 validated sources; selected Nero SUB decoded at 1080p through Morrow. |
 | Anistream | Oct 9 actual site catalog/stream API returned 8 validated sources for each tested One Piece E1/Boruto E3 query; selected Nero SUB decoded at 1080p. |
