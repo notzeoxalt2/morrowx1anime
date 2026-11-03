@@ -4,10 +4,11 @@ const morrowGzip=(function(){var module={exports:{}},exports=module.exports;
 return module.exports;})();
 // Miruro's current catalog API. Server/audio choices come from the episode response.
 const MIRURO_BASE = 'https://www.miruro.to';
+const MIRURO_SITE = 'https://www.miruro.to';
 const MIRURO_HEADERS = {Referer:MIRURO_BASE+'/',Origin:MIRURO_BASE,'User-Agent':'Mozilla/5.0'};
 const norm = s => String(s||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g,'');
 async function requestJson(url) {
-  const response=await fetch(url,{headers:MIRURO_HEADERS});
+  const response=await fetch(url,{headers:MIRURO_HEADERS,timeoutMs:6000});
   if(!response.ok) throw new Error('HTTP '+response.status);
   if((response.headers.get('content-type')||'').includes('octet-stream')) {
     const bytes=new Uint8Array(await response.arrayBuffer()),key='miruro/catalog';
@@ -30,17 +31,19 @@ async function metadata(id,type,season,episode) {
   }
   const show=await requestJson('https://api.themoviedb.org/3/'+mediaType+'/'+tmdbId+'?api_key='+key);
   const info={title:show.name||show.title,original:show.original_name||show.original_title,tmdbId,mediaType,season,year:Number((show.first_air_date||show.release_date||'').slice(0,4))};
-  if(mediaType==='tv'&&Number(season)>1&&!globalThis.MORROW_MEDIA_CONTEXT?.anilistId) {
+  if(mediaType==='tv'&&!globalThis.MORROW_MEDIA_CONTEXT?.anilistId) {
     info.requestedEpisode=await requestJson('https://api.themoviedb.org/3/tv/'+tmdbId+'/season/'+season+'/episode/'+episode+'?api_key='+key);
     if(Number(info.requestedEpisode.season_number)!==season||Number(info.requestedEpisode.episode_number)!==episode)return null;
   }
   return info;
 }
 async function getStreams(id,type='tv',season=1,episode=1) {
+  const context=globalThis.MORROW_MEDIA_CONTEXT||{};
+  let searchTitle=String(context.animeTitle||'').trim();
   try {
     season=Math.max(1,Number(season)||1);episode=Math.max(1,Number(episode)||1);
     const info=await metadata(id,type,season,episode);if(!info?.title)return [];
-    const context=globalThis.MORROW_MEDIA_CONTEXT||{};
+    searchTitle=context.animeTitle||info.title||info.original||searchTitle;
     const search=title=>requestJson(MIRURO_BASE+'/api/v1/anime?q='+encodeURIComponent(title)+'&limit=5&sort=-popularity');
     let response=await search(info.title);
     if(context.anilistId&&!response.data?.some(row=>(row.external_ids?.anilist||[]).map(String).includes(context.anilistId))&&context.animeTitle)response=await search(context.animeTitle);
@@ -101,7 +104,21 @@ async function getStreams(id,type='tv',season=1,episode=1) {
     const accessible = (await Promise.all(streams.map(async stream =>
       stream.type !== "m3u8" || await morrowAccessibleHls(stream.url, stream.headers) ? stream : null))).filter(Boolean);
     const seen=new Set();return accessible.filter(s=>{const key=s.name+'|'+s.url;if(seen.has(key))return false;seen.add(key);return true});
-  }catch(error){console.error('[Miruro] '+error.message);return []}
+  }catch(error){
+    const message=String(error&&error.message||error||'request failed').slice(0,180);
+    console.error('[Miruro] '+message);
+    // Keep the provider visible when Miruro blocks its catalog API. This is
+    // an explicit browser handoff, not a claim that playback was verified.
+    if(/HTTP (?:401|403|429)\b/.test(message)&&searchTitle) {
+      return [{
+        name:'Miruro | Open site search · API blocked',
+        title:searchTitle+(type==='movie'?'':' · S'+season+' E'+episode),
+        url:MIRURO_SITE+'/search?query='+encodeURIComponent(searchTitle)+'&sort=-popularity',
+        type:'external',quality:'Choose the episode on Miruro',language:'und',provider:'Miruro',headers:{},subtitles:[],
+      }];
+    }
+    throw new Error('Miruro catalog request failed: '+message);
+  }
 }
 module.exports={getStreams};
 

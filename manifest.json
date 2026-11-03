@@ -1,6 +1,6 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.8.9",
+  "version": "1.8.10",
   "description": "Unified Morrow anime adapters. Exact content and native playback evidence is listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
@@ -193,7 +193,7 @@
       "id": "miruro",
       "name": "Miruro",
       "description": "Miruro anime source adapter",
-      "version": "1.8.3",
+      "version": "1.8.4",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
