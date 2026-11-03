@@ -1,6 +1,6 @@
 {
   "name": "Morrow Anime X1",
-  "version": "1.8.7",
+  "version": "1.8.8",
   "description": "Unified Morrow anime adapters. Exact content and native playback evidence is listed in PROVIDER_STATUS.md.",
   "scrapers": [
     {
@@ -239,7 +239,7 @@
       "id": "animeheaven",
       "name": "AnimeHeaven",
       "description": "AnimeHeaven anime source adapter",
-      "version": "1.8.0",
+      "version": "1.8.1",
       "author": "Morrow Team",
       "supportedTypes": [
         "anime"
@@ -257,7 +257,7 @@
         "hi"
       ],
       "logo": "https://static.everythingmoe.com/icons/animeheavenme.png",
-      "animeEpisodeNumbering": "absolute"
+      "animeEpisodeNumbering": "anilist-entry"
     },
     {
       "id": "kurage",

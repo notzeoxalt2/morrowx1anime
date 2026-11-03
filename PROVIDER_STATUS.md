@@ -1,6 +1,6 @@
 # Provider verification status
 
-Updated 2026-10-30 for Anime X1 1.8.7. Stream discovery, valid manifests, decoded playback, and all-server coverage are different checks. These records describe the evidence actually obtained.
+Updated 2026-11-03; Anime X1 1.8.8 is the current working-tree candidate. Stream discovery, valid manifests, decoded playback, and all-server coverage are different checks. These records describe the evidence actually obtained.
 
 | Provider | Evidence / remaining work |
 |---|---|
@@ -14,7 +14,7 @@ Updated 2026-10-30 for Anime X1 1.8.7. Stream discovery, valid manifests, decode
 | Anitaku | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | Miruro | Oct 9 actual IMDb series requests for One Piece S1E1/E2 returned 15/13 validated sources including SUB and DUB. Removed unsupported catalog episode-list dependency for season 1. Previous native decode evidence remains; later-season TMDB mapping and every server/title are not certified. |
 | ReAnime | Actual catalog, episode, FlixCloud, and playlist transport. Oct 30 current-host Morrow runtime and bundled libmpv decoded Re:Zero S1E1, Re:Zero S4E3, and Attack on Titan S2E12 at 1080p. Handles title punctuation differences (such as `Re:ZERO` versus `ReZERO`), parses season/episode from release names without consuming adjacent resolution digits, supports exact-title rows with a missing AniList ID, rejects conflicting IDs, and deduplicates identical embed URLs before extraction. Three named samples only; every server/title is not certified. |
-| AnimeHeaven | Actual site catalog/episode and MP4 integration. Oct 9 selected One Piece E1 CX source decoded at 720p through Morrow. Other titles/CDNs not certified. |
+| AnimeHeaven | Actual site catalog/episode and MP4 integration. Nov 3: the downloadable adapter handles split installment pages and flat franchise pages; its Morrow QuickJS fixture tests pass. Live Attack on Titan S2E12 and S3 Part 2 E10 each returned 3 site-listed SUB choices; the RT route decoded at 1280×720 through Morrow's local proxy and bundled decoder for both. The other returned hosts were not decoded; other titles, episodes and CDNs are not certified. |
 | Kurage | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | AnimeDekho | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
 | Anime Nexus | Legacy renamed Anidap route disabled; use genuine Anidap. Separate site integration not implemented or certified. |
@@ -97,3 +97,7 @@ Updated 2026-10-30 for Anime X1 1.8.7. Stream discovery, valid manifests, decode
 All returned Boruto episode 3 choices decoded using Morrow's actual QuickJS plugin runtime, local HTTP proxy and bundled libmpv: Miruro 12/12, Anikage 4/4, Anidap 5/5. Miruro HD-1 SUB and DUB decoded at 1080p after image-wrapped MPEG-TS transport was corrected in Desktop 0.1.34 / Android 0.4.32.
 
 The adapters now check the first media segment, including request headers. Routes with inaccessible segments are omitted rather than advertised as playable. This check does not guarantee every segment, quality, encryption key or device. Counts can vary with host availability. No certification of every requested integration is implied.
+
+# November 3, AnimeHeaven season routing recheck
+
+Compared the downloadable X1 adapter against the desktop implementation in Morrow's real QuickJS runtime. Before the update, the downloadable adapter failed both a split-season routing fixture and the flat-franchise absolute-episode fixture. After syncing the mixed-page routing logic and declaring AniList-entry episode numbering, both Morrow fixture tests passed. Live site checks returned three SUB choices for Attack on Titan S2E12 and three for S3 Part 2 E10; the RT route decoded for both at 1280×720 using Morrow's local proxy and bundled Windows decoder. This confirms those two coordinates and one host route each, not every AnimeHeaven server/title or Android playback.
